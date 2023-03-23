@@ -1,8 +1,12 @@
 body {
   padding: 5em;
   font-size: 20px;
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
   color: #300030;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: repeat(auto-fill, 600px);
+  gap: 0 30px;
 }
 
 pre {
@@ -20,21 +24,23 @@ h2.small {
   text-transform: uppercase;
 }
 
-nav > h1 {
-  display: inline;
-  margin: 0;
-}
+nav {
+  grid-row: 1;
+  grid-column: 1;
 
-nav a {
-  text-decoration: none;
-}
-
-ul {
-  list-style-type: '- ';
-}
-
-p {
-  max-width: 600px;
+  a {
+    text-decoration: none;
+  }
+  h1 {
+    display: inline;
+    margin: 0;
+  }
+  ul {
+    list-style-type: "- ";
+  }
+  p {
+    max-width: 600px;
+  }
 }
 
 .MOTD {
@@ -46,12 +52,6 @@ p {
 @media screen and (prefers-color-scheme: dark) {
   body {
     color: whitesmoke;
-    background-color: rgb(32 29 32);
-  }
-}
-
-@keyframes blink {
-  to {
     background-color: rgb(32 29 32);
   }
 }
@@ -69,9 +69,9 @@ section,
 .warning {
   border: 3px solid var(--border);
   border-radius: 5px;
-  
+
   max-width: 600px;
-  
+
   padding: 20px;
   margin-block: 2em;
 }
@@ -88,38 +88,26 @@ section,
   --border: lightgray;
   margin: 0;
   grid-row: span 2;
-
 }
 
-section h3,
-section h3 + p {
-  padding-inline-start: 20px;
-}
+section {
+  h3,
+  h3 + p {
+    padding-inline-start: 20px;
+  }
 
+  h4,
+  h4 + p {
+    padding-inline-start: 40px;
+  }
 
-section h4,
-section h4 + p {
-  padding-inline-start: 40px;
-}
+  :first-child {
+    margin-top: 0;
+  }
 
-section :first-child {
-  margin-top: 0;
-}
-
-section :last-child {
-  margin-bottom: 0;
-}
-
-body {
-  display: grid;
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: repeat(auto-fill, 600px);
-  gap: 0 30px;
-}
-
-nav {
-  grid-row: 1;
-  grid-column: 1;
+  :last-child {
+    margin-bottom: 0;
+  }
 }
 
 main {
@@ -133,8 +121,8 @@ footer > p {
 
 hr {
   border: 0;
-}
 
-hr::after {
-  content: "✲✲✲";
+  &::after {
+    content: "✲✲✲";
+  }
 }
