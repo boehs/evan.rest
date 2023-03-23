@@ -1,12 +1,14 @@
 import { For, Show } from "solid-js"
 import { A, Title } from "solid-start"
+import Footer from "~/components/foot"
 import Logo from "~/components/logo"
 import { Time } from "./(main)/time"
 
 const routes = {
-  basic: [['ping', 'pong']],
+  basic: [['ping', 'pong'],'about'],
   vitals: [['time', <Time />], 'asleep', 'heartbeat'],
-//  transcend: [['windchime', '🎐']]
+  //tech: ['battery', 'listening', 'session'],
+  //transcend: [['windchime', '🎐']],
 }
 
 const messages = [
@@ -15,7 +17,11 @@ const messages = [
   "I pray this winter be gentle and kind - a season of rest from the wheel of the mind",
   "He sought out cold waterfalls, small thick forests, and thought about nothing at all.",
   "Is it possible to find silence in the midst of today's noisy world?",
-  "A restless mind makes a problem of a resting body."
+  "A restless mind makes a problem of a resting body.",
+  "In today's rush we all think too much, seek too much, want too much and forget about the joy of just Being.",
+  "Rest is not idleness, and to lie sometimes on the grass under trees on a summer's day, listening to the murmur of the water, or watching the clouds float across the sky, is by no means a waste of time.",
+  "Don't underestimate the value of doing nothing, of just going along, listening to all the things you can't hear, and not bothering.",
+  "Almost everything will work again if you unplug it for a few minutes, including you."
 ]
 
 export default function Home() {
@@ -37,5 +43,7 @@ export default function Home() {
         </ul>
       </>}
     </For>
+    <hr/>
+    <Footer/>
   </main>
 }

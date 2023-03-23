@@ -2,13 +2,16 @@ body {
   padding: 5em;
   font-size: 20px;
   font-family: 'Space Mono', monospace;
-  color: rgb(48, 0, 48);
+  color: #300030;
 }
 
 pre {
   font-weight: bold;
   position: relative;
   display: inline-block;
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow: auto;
 }
 
 h1,
@@ -20,6 +23,10 @@ h2.small {
 nav > h1 {
   display: inline;
   margin: 0;
+}
+
+nav a {
+  text-decoration: none;
 }
 
 ul {
@@ -73,6 +80,10 @@ section,
   --border: #e57736;
 }
 
+.error {
+  --border: #e54a36;
+}
+
 .gray {
   --border: lightgray;
   margin: 0;
@@ -114,4 +125,16 @@ nav {
 main {
   grid-row: 2;
   grid-column: 1;
+}
+
+footer > p {
+  margin-block: 0;
+}
+
+hr {
+  border: 0;
+}
+
+hr::after {
+  content: "✲✲✲";
 }

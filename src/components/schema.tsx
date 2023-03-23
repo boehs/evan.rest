@@ -1,5 +1,6 @@
-import { For, Show } from "solid-js"
+import { For, JSX, Show } from "solid-js"
 import { A } from "solid-start"
+import { Private } from "./warnings"
 
 type method = 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE'
 
@@ -10,7 +11,7 @@ export default function Schema(props: {
       [param: string]: string
     },
     protected?: boolean
-  }, string][]
+  }, string | JSX.Element][]
 }) {
   return <section class="gray">
     <h2>API</h2>
@@ -28,7 +29,7 @@ export default function Schema(props: {
             </ul>
           </Show>
           <Show when={options.protected}>
-            NOTE: This route is only for me. You cannot use it. Or, I mean you could try.
+            <Private/>
           </Show>
         </Show>
         <h4>Returns</h4>
