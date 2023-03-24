@@ -19,18 +19,18 @@ export default function Logo() {
       if (tick() - 9 >= i) return 'z'
       else return ' '
     }
-    // 
+    //
     else if (tick() > 4) {
       if (tick() - 5 >= i) return ' '
     }
-    // 
+    //
     else if (tick() == i) return 'Z'
     return 'z'
   }
 
-  return <div class="logo"><pre>{`    +       *      . 
-        .      *       
-  _____   ____ _ _ __  
+  return <div class="logo"><pre>{`    +       *      .
+        .      *
+  _____   ____ _ _ __
  / _ \\ \\ / / _\` | '_ \\
 |  __/\\ V / (_| | | | |
  \\___| \\_/ \\__,_|_| |_(`}

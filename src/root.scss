@@ -7,7 +7,7 @@ body {
   grid-template-rows: min-content 1fr;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 600px), 1fr));
   gap: 0 30px;
-  
+
   > * {
     max-width: 600px;
   }
@@ -25,7 +25,7 @@ pre {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1em;
-  
+
   pre {
     margin: 0;
   }
@@ -71,7 +71,7 @@ nav {
     color: whitesmoke;
     background-color: rgb(32 29 32);
   }
-  
+
   a {
     color: #e15be1;
   }
