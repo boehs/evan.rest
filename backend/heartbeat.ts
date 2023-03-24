@@ -13,6 +13,7 @@ app.get('/heartbeat', async c => {
 })
 
 app.post('/heartbeat', async c => {
+  console.log(c.env.PW,c.req.headers.get('Authorization'))
   if (c.req.headers.get('Authorization') == c.env.PW) {
     await c.env.RESTFUL.put('heartbeat', JSON.stringify({
       beat: Date.now(),

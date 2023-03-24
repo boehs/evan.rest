@@ -1,15 +1,10 @@
+import { getHeartbeat } from "../../lib/heartbeat"
 import { For, Show } from "solid-js"
-import { A, Title } from "solid-start"
+import { A, Title, useRouteData } from "solid-start"
+import { createServerData$ } from "solid-start/server"
 import Footer from "~/components/foot"
 import Logo from "~/components/logo"
 import { Time } from "./(main)/time"
-
-const routes = {
-  basic: [['ping', 'pong'],'about'],
-  vitals: [['time', <Time />], 'asleep', 'heartbeat'],
-  //tech: ['battery', 'listening', 'session'],
-  //transcend: [['windchime', '🎐']],
-}
 
 const messages = [
   "Now with 100% less caffeine",
@@ -24,7 +19,29 @@ const messages = [
   "Almost everything will work again if you unplug it for a few minutes, including you."
 ]
 
+export function routeData() {
+  return {
+    heartbeat: createServerData$(async (_, { env }) => {
+      return await getHeartbeat(env as Bindings)
+    })
+  }
+}
+
 export default function Home() {
+  const { heartbeat } = useRouteData<typeof routeData>()
+  const routes = {
+    basic: [['ping', 'pong'], 'about'],
+    vitals: [['time', <Time />], 'asleep', 'heartbeat'],
+    tech: [
+      ['battery', heartbeat.loading ? '' : heartbeat()?.data.device.battery + '%' || '∞' ],
+      ['listening', <Show when={heartbeat()?.data.music}>
+        {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
+      </Show>],
+      'session'
+    ],
+    //transcend: [['windchime', '🎐']],
+  }
+
   return <main>
     <Title>Home</Title>
     <Logo />
@@ -43,7 +60,7 @@ export default function Home() {
         </ul>
       </>}
     </For>
-    <hr/>
-    <Footer/>
+    <hr />
+    <Footer />
   </main>
 }

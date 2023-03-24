@@ -17,7 +17,7 @@ export default function Schema(props: {
     <h2>API</h2>
     <For each={props.routes}>
       {([method, route, options, returns]) => <>
-        <h3>{method.toUpperCase()} <A href={'/api/' + route}>{'/api/' + route}</A></h3>
+        <h3>{method.toUpperCase()} <a href={'/api/' + route}>{'/api/' + route}</a></h3>
         <Show when={typeof options == 'object'} fallback={<p>{options as string}</p>}>
           <p>{options.description}</p>
           <Show when={options.params}>

@@ -7,7 +7,7 @@ import { useRouteData } from "solid-start"
 export function routeData() {
   return {
     heartbeat: createServerData$(async (_, { env }) => {
-      return await getHeartbeat(env)
+      return await getHeartbeat(env as Bindings)
     })
   }
 }

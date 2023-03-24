@@ -113,6 +113,10 @@ section {
 main {
   grid-row: 2;
   grid-column: 1;
+  
+  pre:first-child {
+    margin-top: 0;
+  }
 }
 
 footer > p {
