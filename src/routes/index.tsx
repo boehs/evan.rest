@@ -4,7 +4,8 @@ import { A, Title, useRouteData } from "solid-start"
 import { createServerData$ } from "solid-start/server"
 import Footer from "~/components/foot"
 import Logo from "~/components/logo"
-import { Time } from "./(main)/time"
+import { Time } from "./(main)/(vitals)/time"
+import { isAsleep } from "./(main)/(vitals)/asleep"
 
 const messages = [
   "Now with 100% less caffeine",
@@ -31,13 +32,13 @@ export default function Home() {
   const { heartbeat } = useRouteData<typeof routeData>()
   const routes = {
     basic: [['ping', 'pong'], 'about'],
-    vitals: [['time', <Time />], 'asleep', 'heartbeat'],
+    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], 'heartbeat'],
     tech: [
       ['battery', heartbeat.loading ? '' : heartbeat()?.data.device.battery + '%' || '∞' ],
       ['listening', <Show when={heartbeat()?.data.music}>
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
-      'session'
+      //'session'
     ],
     //transcend: [['windchime', '🎐']],
   }
