@@ -1,6 +1,6 @@
-use std::fs;
+use std::{error::Error, fs};
 
-use reqwest;
+use reqwest::header::AUTHORIZATION;
 use serde_derive::{Deserialize, Serialize};
 use serde_json::json;
 
@@ -29,6 +29,7 @@ pub struct Env {
     aw_session_bucket: String,
     lastfm_user: String,
     lastfm_key: String,
+    pw: String,
 }
 
 #[derive(Deserialize, Debug)]
@@ -74,18 +75,12 @@ struct LastFm {
     url: String,
 }
 
-#[derive(Serialize, Debug)]
-struct Res {
-    sessionLength: i16,
-    device: Device,
-    music: Option<LastFm>,
-}
-
 #[tokio::main]
-async fn main() -> Result<(), reqwest::Error> {
+async fn main() -> Result<(), Box<dyn Error>> {
     let client = reqwest::Client::new();
 
-    let env = envy::from_env::<Env>().unwrap();
+    dotenvy::dotenv()?;
+    let env = envy::from_env::<Env>()?;
 
     println!("Fetching session data");
 
@@ -128,7 +123,7 @@ async fn main() -> Result<(), reqwest::Error> {
         .await?
         .json::<LfmRes>()
         .await?;
-    
+
     let last_fm_track = &last_fm_track.recenttracks.track[0];
 
     let music = match &last_fm_track.attr {
@@ -142,20 +137,18 @@ async fn main() -> Result<(), reqwest::Error> {
 
     println!("Getting device statistics");
 
-    let battery_charging = fs::read_to_string("/sys/class/power_supply/BAT0/status")
-        .unwrap()
+    let battery_charging = fs::read_to_string("/sys/class/power_supply/BAT0/status")?
         .trim()
         .to_owned();
 
-    let battery = match battery_charging.as_str() {
-        "Discharging" => Some(
-            fs::read_to_string("/sys/class/power_supply/BAT0/capacity")
-                .unwrap()
+    let battery = if battery_charging.as_str() == "Discharging" {
+        Some(
+            fs::read_to_string("/sys/class/power_supply/BAT0/capacity")?
                 .trim()
-                .parse::<i8>()
-                .unwrap(),
-        ),
-        _ => None,
+                .parse::<i8>()?,
+        )
+    } else {
+        None
     };
 
     println!("Wrapping Up");
@@ -171,11 +164,21 @@ async fn main() -> Result<(), reqwest::Error> {
 
     println!("{}", completed);
 
-    client
-        .post("https://evan.rest/heartbeat")
+    let endpoint = if cfg!(debug_assertions) {
+        "http://localhost:3000/api/heartbeat"
+    } else {
+        "https://evan.rest/api/heartbeat"
+    };
+
+    let final_r = client
+        .post(endpoint)
         .json(&completed)
+        .header(AUTHORIZATION, &env.pw)
         .send()
-        .await?;
+        .await?
+        .status();
+
+    println!("Done with a {}", final_r.as_u16());
 
     Ok(())
 }

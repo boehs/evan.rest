@@ -1,30 +1,31 @@
+import { getHeartbeat } from "../../../lib/heartbeat"
+import { createServerData$, PageEvent } from "solid-start/server"
 import Schema from "~/components/schema"
+import { useRouteData } from "solid-start"
+
+
+export function routeData() {
+  return {
+    heartbeat: createServerData$(async (_, { env }) => {
+      return await getHeartbeat(env)
+    })
+  }
+}
 
 export default function Heartbeat() {
+  const { heartbeat } = useRouteData<typeof routeData>()
   return <>
     <main>
-      <p>Ok, so when you go to some random website with spooky trackers, your browser's heart begins to beat.</p>
-      <p>At intervals, it periodically sends statistics back to the server.</p>
-      <p>I'm doing this, but I'm tracking myself and ya'll can see it.</p>
-      <br/>
+      <p>
+        When you go to a website with spooky trackers, your browser's heart begins to beat.
+        At intervals, it sends statistics back!
+        My computer has it's own heart, I guess.
+      </p>
+      <pre>{JSON.stringify(heartbeat(), null, 2)}</pre>
       <p>Various other routes are built upon this, including /battery, /np, and /asleep</p>
     </main>
     <Schema routes={[
-      ['GET', 'heartbeat', "Get my last heartbeat", <pre>{JSON.stringify({
-        beat: 1679549965,
-        data: {
-          sessionLength: 63,
-          device: {
-            open: "Vivaldi",
-            battery: 63
-          },
-          music: {
-            artist: "Declan McKenna",
-            track: "Brazil",
-            url: "https://www.last.fm/music/Declan+McKenna/_/Brazil"
-          }
-        }
-      }, null, 2)}</pre>],
+      ['GET', 'heartbeat', "Get my last heartbeat", 'See left'],
       ['POST', 'heartbeat', {
         description: "Update the heartbeat",
         protected: true

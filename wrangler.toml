@@ -1,0 +1,6 @@
+name = "restful"
+compatibility_date = "2023-03-23"
+
+kv_namespaces=[
+  { binding = "RESTFUL", id = "073cb17a9a0a4a248139222dcdaf7e11" }
+]

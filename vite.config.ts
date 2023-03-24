@@ -4,6 +4,9 @@ import cloudflare from 'solid-start-cloudflare-pages'
 
 export default defineConfig({
   plugins: [solid({
-    adapter: cloudflare({})
+    adapter: cloudflare({
+      kvNamespaces: ["RESTFUL"],
+      envPath: true
+    })
   })],
 });
