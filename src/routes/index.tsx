@@ -62,7 +62,7 @@ export default function Home() {
         </ul>
       </>}
     </For>
-    <hr />
+    <h2 class="small">✲✲✲</h2>
     <Footer />
   </main>
 }
