@@ -1,4 +1,4 @@
-use std::{error::Error, fs};
+use std::{error::Error, fs, path::{PathBuf}};
 
 use reqwest::header::AUTHORIZATION;
 use serde_derive::{Deserialize, Serialize};
@@ -79,7 +79,7 @@ struct LastFm {
 async fn main() -> Result<(), Box<dyn Error>> {
     let client = reqwest::Client::new();
 
-    dotenvy::dotenv()?;
+    dotenvy::from_path(PathBuf::from(dirs::config_local_dir().unwrap()).join("erest"))?;
     let env = envy::from_env::<Env>()?;
 
     println!("Fetching session data");
