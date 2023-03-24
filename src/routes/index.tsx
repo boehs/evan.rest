@@ -6,6 +6,7 @@ import Footer from "~/components/foot"
 import Logo from "~/components/logo"
 import { Time } from "./(main)/(vitals)/time"
 import { isAsleep } from "./(main)/(vitals)/asleep"
+import { mAgo } from "./(main)/(vitals)/heartbeat"
 
 const messages = [
   "Now with 100% less caffeine",
@@ -32,10 +33,10 @@ export default function Home() {
   const { heartbeat } = useRouteData<typeof routeData>()
   const routes = {
     basic: [['ping', 'pong'], 'about'],
-    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], 'heartbeat'],
+    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', mAgo(heartbeat()?.beat!) + ' minutes ago']],
     tech: [
-      ['battery', heartbeat.loading ? '' : heartbeat()?.data.device.battery + '%' || '∞' ],
-      ['listening', <Show when={heartbeat()?.data.music}>
+      ['battery', heartbeat.loading ? '' : heartbeat()?.data.device.battery || '∞' ],
+      ['np', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
       //'session'
