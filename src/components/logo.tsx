@@ -2,18 +2,18 @@ import { createSignal, onCleanup, onMount } from "solid-js"
 
 
 export default function Logo() {
-  const [tick,setTick] = createSignal(0)
-  
+  const [tick, setTick] = createSignal(0)
+
   let int: NodeJS.Timer
-  
+
   onMount(() => {
     int = setInterval(() => {
-      setTick(tick => tick == 12 ? 0 : tick+1)
-    },500)
+      setTick(tick => tick == 12 ? 0 : tick + 1)
+    }, 500)
   })
-  
+
   onCleanup(() => clearTimeout(int))
-  
+
   const z = (i: number) => {
     if (tick() > 8) {
       if (tick() - 9 >= i) return 'z'
@@ -27,14 +27,20 @@ export default function Logo() {
     else if (tick() == i) return 'Z'
     return 'z'
   }
-  
-  return <pre class="logo">
-{`    +       *      .         ${z(1)}    ${z(3)}    _
-        .      *           ${z(0)}   ${z(2)}      | |
-  _____   ____ _ _ __    _ __ ___  ___| |_
- / _ \\ \\ / / _\` | '_ \\  | '__/ _ \\/ __| __|
-|  __/\\ V / (_| | | | |_| | |  __/\\__ \\ |_
- \\___| \\_/ \\__,_|_| |_(_)_|  \\___||___/\\__|
-`}
+
+  return <div class="logo"><pre>{`    +       *      . 
+        .      *       
+  _____   ____ _ _ __  
+ / _ \\ \\ / / _\` | '_ \\
+|  __/\\ V / (_| | | | |
+ \\___| \\_/ \\__,_|_| |_(`}
   </pre>
+    <pre class="logo">{`      ${z(1)}    ${z(3)}    _
+    ${z(0)}   ${z(2)}      | |
+  _ __ ___  ___| |_
+ | '__/ _ \\/ __| __|
+_| | |  __/\\__ \\ |_
+_)_|  \\___||___/\\__|`}
+    </pre>
+  </div>
 }

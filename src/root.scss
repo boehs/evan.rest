@@ -19,11 +19,15 @@ pre {
   display: inline-block;
   white-space: pre-wrap;
   max-width: 100%;
-  overflow: auto;
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
   
-  &.logo {
-    white-space: pre;
-    overflow: auto;
+  pre {
+    margin: 0;
   }
 }
 
@@ -136,10 +140,6 @@ section {
 main {
   grid-row: 2;
   grid-column: 1;
-  
-  pre:first-child {
-    margin-top: 0;
-  }
 }
 
 footer > p {
