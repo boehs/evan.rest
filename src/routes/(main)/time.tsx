@@ -55,7 +55,7 @@ export default function TimeRoute() {
     </main>
     <Schema routes={[
       ['GET', 'time', 'Get my time!', 'My time, 12 hour with AM/PM'],
-      ['GET', 'time/diff', 'Get the difference between our times', 'The number of hours.']
+      //['GET', 'time/diff', 'Get the difference between our times', 'The number of hours.']
     ]} />
   </>
 } 
