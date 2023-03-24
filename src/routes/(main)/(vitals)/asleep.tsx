@@ -11,7 +11,7 @@ export default function Asleep() {
   return <>
     <main>
       <h2>Is Evan Asleep? 💤</h2>
-      <p><b>{isAsleep() ? 'Yes!' : 'No!'}</b>*</p>
+      <p><b>{() => isAsleep() ? 'Yes!' : 'No!'}</b>*</p>
       <p>*If my computer is running, Every 10 minutes it sends a heartbeat.</p>
       <p>Generally, I'd say my sleeping hours are 10PM-7AM, so if my time is in that range *and* there hasn't been a heartbeat for more than 10 minutes, I'm probably asleep 😅</p>
       <Checklist list={[
