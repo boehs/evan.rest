@@ -20,6 +20,11 @@ pre {
   white-space: pre-wrap;
   max-width: 100%;
   overflow: auto;
+  
+  &.logo {
+    white-space: pre;
+    overflow: auto;
+  }
 }
 
 h1,

@@ -28,7 +28,7 @@ export default function Logo() {
     return 'z'
   }
   
-  return <pre>
+  return <pre class="logo">
 {`    +       *      .         ${z(1)}    ${z(3)}    _
         .      *           ${z(0)}   ${z(2)}      | |
   _____   ____ _ _ __    _ __ ___  ___| |_
