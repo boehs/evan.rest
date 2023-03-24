@@ -33,9 +33,9 @@ export default function Home() {
   const { heartbeat } = useRouteData<typeof routeData>()
   const routes = {
     basic: [['ping', 'pong'], 'about'],
-    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', mAgo(heartbeat()?.beat!) + ' minutes ago']],
+    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago']],
     tech: [
-      ['battery', heartbeat.loading ? '' : heartbeat()?.data.device.battery || '∞' ],
+      ['battery', () => heartbeat.loading ? '' : heartbeat()?.data.device.battery || '∞' ],
       ['music', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
