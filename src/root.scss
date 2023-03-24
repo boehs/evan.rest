@@ -68,6 +68,12 @@ nav {
   }
 }
 
+@media screen and (max-width: 800px) {
+  body {
+    padding: 5em 20px;
+  }
+}
+
 button {
   font-family: inherit;
   font-size: inherit;
