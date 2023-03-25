@@ -21,7 +21,7 @@ struct Afk {
 }
 
 pub struct Activity {
-    pub session_length: f64,
+    pub session_length: i32,
     pub open: String,
 }
 
@@ -48,7 +48,7 @@ pub async fn get(client: &Client, env: &Env) -> Result<Activity, reqwest::Error>
         .await?
         .json::<Vec<Event<Afk>>>()
         .await?[0]
-        .duration;
+        .duration as i32;
 
     Ok(Activity {
         session_length: session_length,
