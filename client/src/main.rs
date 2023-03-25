@@ -1,7 +1,7 @@
 mod activity_watch;
 mod last_fm;
 
-use std::{error::Error, path::PathBuf};
+use std::{error::Error, path::PathBuf, env};
 
 use reqwest::header::AUTHORIZATION;
 use serde_derive::Deserialize;
@@ -58,6 +58,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         "device":  {
            "open": activity.open,
            "battery": battery,
+           "os": env::consts::OS
         },
         "music": music,
     });
