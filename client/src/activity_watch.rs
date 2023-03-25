@@ -28,7 +28,7 @@ pub struct Activity {
 pub async fn get(client: &Client, env: &Env) -> Result<Activity, reqwest::Error> {
     let last_event = client
         .get(format!(
-            "{}buckets/{}/events",
+            "{}{}/events",
             env.aw_base, env.aw_event_bucket
         ))
         .query(&[("limit", "1")])
@@ -40,7 +40,7 @@ pub async fn get(client: &Client, env: &Env) -> Result<Activity, reqwest::Error>
 
     let session_length = client
         .get(format!(
-            "{}buckets/{}/events",
+            "{}{}/events",
             env.aw_base, env.aw_session_bucket
         ))
         .query(&[("limit", "1")])

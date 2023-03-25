@@ -1,27 +1,36 @@
 mod activity_watch;
 mod last_fm;
 
-use std::{error::Error, fs, path::PathBuf};
+use std::{error::Error, path::PathBuf};
 
 use reqwest::header::AUTHORIZATION;
 use serde_derive::Deserialize;
 use serde_json::json;
 
+fn default_resource() -> String {
+    "http://localhost:5600/api/0/buckets/".to_string()
+}
+
 #[derive(Deserialize, Debug)]
 pub struct Env {
+    #[serde(default="default_resource")]
     aw_base: String,
     aw_event_bucket: String,
     aw_session_bucket: String,
     lastfm_user: String,
     lastfm_key: String,
-    pw: String,
+    pw: String
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     let client = reqwest::Client::new();
 
-    dotenvy::from_path(PathBuf::from(dirs::config_local_dir().unwrap()).join("erest"))?;
+    let config_path = PathBuf::from(dirs::home_dir().unwrap()).join(".config/erest");
+
+    println!("{}", config_path.clone().into_os_string().into_string().unwrap());
+
+    dotenvy::from_path(config_path)?;
     let env = envy::from_env::<Env>()?;
 
     println!("Fetching session data");
@@ -34,16 +43,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Getting device statistics");
 
-    let battery_charging = fs::read_to_string("/sys/class/power_supply/BAT0/status")?
-        .trim()
-        .to_owned();
+    let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
 
-    let battery = if battery_charging.as_str() == "Discharging" {
-        Some(
-            fs::read_to_string("/sys/class/power_supply/BAT0/capacity")?
-                .trim()
-                .parse::<i8>()?,
-        )
+    let battery = if battr.state() == battery::State::Discharging {
+        Some((battr.energy().value / battr.energy_full().value * 100.0) as i8)
     } else {
         None
     };
