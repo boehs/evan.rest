@@ -58,7 +58,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
         "device":  {
            "open": activity.open,
            "battery": battery,
-           "os": env::consts::OS
+           "os": env::consts::OS,
+           "arch": env::consts::ARCH
         },
         "music": music,
     });
