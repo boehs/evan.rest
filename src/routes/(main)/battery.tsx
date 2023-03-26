@@ -36,7 +36,7 @@ export default function Main() {
                 <polyline
                     fill="none"
                     stroke="#b428b4"
-                    stroke-width="2"
+                    stroke-width="1"
                     points={computedPoints()} />
                 <polyline
                     fill="url(#bg)"
