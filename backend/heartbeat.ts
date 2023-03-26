@@ -20,11 +20,11 @@ app.post('/heartbeat', async c => {
     const allBeats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
     const filtered = (allBeats || []).filter(beat => Date.now() < beat.beat + day)
     await c.env.RESTFUL.put('heartbeat', JSON.stringify([
-      ...filtered,
       {
         beat: Date.now(),
         data: await c.req.json()
-      }
+      },
+      ...filtered
     ]))
     return c.newResponse(null, 200)
   }
