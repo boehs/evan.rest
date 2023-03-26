@@ -16,6 +16,7 @@ export default function Music() {
     const { music } = useRouteData<typeof routeData>()
     return <>
         <main>
+            <sup>Fondly known as hack.fm</sup>
             <p>
                 This is a list of songs I've listened to in the last 24 hours.
             </p>

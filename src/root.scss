@@ -56,7 +56,7 @@ nav {
   }
 }
 
-.MOTD {
+sup,.sup {
   color: gray;
   font-size: 15px;
   margin-top: 0;
@@ -107,8 +107,8 @@ section,
   --border: #e54a36;
 }
 
-.gray {
-  --border: lightgray;
+.schema {
+  border: 0;
   margin: 0;
   grid-row: span 2;
 }

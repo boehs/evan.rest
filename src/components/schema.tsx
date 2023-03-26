@@ -13,7 +13,7 @@ export default function Schema(props: {
     protected?: boolean
   }, string | JSX.Element][]
 }) {
-  return <section class="gray">
+  return <section class="schema">
     <h2>API</h2>
     <For each={props.routes}>
       {([method, route, options, returns]) => <>

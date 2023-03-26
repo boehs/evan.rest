@@ -36,7 +36,7 @@ export default function Home() {
     vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago']],
     tech: [
       ['battery', () => heartbeat.loading ? '' : heartbeat()?.data.device.battery || '∞' ],
-      ['hack.fm', <Show when={heartbeat()?.data.music} fallback="🔇">
+      ['music', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
       //'session'
@@ -47,7 +47,7 @@ export default function Home() {
   return <main>
     <Title>Home</Title>
     <Logo />
-    <p class="MOTD">{messages[messages.length * Math.random() | 0]}</p>
+    <p class="sup">{messages[messages.length * Math.random() | 0]}</p>
     <For each={Object.entries(routes)}>
       {([section, subroutes]) => <>
         <h2 class="small">{section}</h2>

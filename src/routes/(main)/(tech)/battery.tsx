@@ -12,8 +12,9 @@ export function routeData() {
             const forSvg = ranges?.map(beat => {
                 beat[0] = 288 - beat[0]
                 beat[1] = 102 - beat[1]
+                return beat
             })
-            return ranges
+            return forSvg
         })
     }
 }
