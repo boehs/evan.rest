@@ -42,7 +42,7 @@ export default function Main() {
                     fill="url(#bg)"
                     stroke="#b428b4"
                     stroke-width="0"
-                    points={`290,102 ${computedPoints()} 0,102`} />
+                    points={`288,102 ${computedPoints()} 0,102`} />
             </svg>
         </main>
     </>
