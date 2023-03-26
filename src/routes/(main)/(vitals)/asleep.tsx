@@ -1,7 +1,6 @@
 import { useRouteData } from "solid-start"
 import Checklist from "~/components/checklist"
 import Schema from "~/components/schema"
-import { NotLive } from "~/components/warnings"
 import { hb } from "~/routes/(main)"
 
 export const hour = Number((new Date()).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: '2-digit', hour12: false }).replace(/ AM| PM/, ''))
