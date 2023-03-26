@@ -8,6 +8,10 @@ export function routeData() {
             const ranges = beats?.map(beat => [
                 Math.round((Date.now() - beat.beat) / 1000 / 60 / 5),
                 beat.data.device.battery || 100])
+            const forSvg = ranges?.map(beat => {
+                beat[0] = 288 - beat[0]
+                beat[1] = 102 - beat[1]
+            })
             return ranges
         })
     }
@@ -15,17 +19,11 @@ export function routeData() {
 
 export default function Main() {
     const { battery } = useRouteData<typeof routeData>()
-    const computedPoints = () => battery()?.map(b => {
-        let be = JSON.parse(JSON.stringify(b))
-        be[0] = 288 - b[0]
-        be[1] = 102 - b[1]
-        return be.join(',')
-    }).join(' ')
-    console.log(computedPoints())
+    const computedPoints = () => battery()?.map(b => b.join(',')).join(' ')
     return <>
         <main>
             <p>
-                My current laptop's battery level is <b>{(battery() || [[0,100]])[0][1]}%</b>.
+                My laptop's current battery level is <b>{100 - (battery() || [[0,100]])[0][1]}%</b>.
                 Below is a graph of my battery level for the last 24 hours.
             </p>
             <svg viewBox="0 0 288 102" class="chart">
