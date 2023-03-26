@@ -23,15 +23,26 @@ export default function Main() {
     return <>
         <main>
             <p>
-                My laptop's current battery level is <b>{100 - (battery() || [[0,100]])[0][1]}%</b>.
+                My laptop's current battery level is <b>{100 - (battery() || [[0, 100]])[0][1]}%</b>.
                 Below is a graph of my battery level for the last 24 hours.
             </p>
             <svg viewBox="0 0 288 102" class="chart">
+                <defs>
+                    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(180, 40, 180, 50%)"/>
+                        <stop offset="100%" stop-color="rgba(180, 40, 180, 0%)" />
+                    </linearGradient>
+                </defs>
                 <polyline
                     fill="none"
                     stroke="#b428b4"
                     stroke-width="2"
-                    points={computedPoints()}/>
+                    points={computedPoints()} />
+                <polyline
+                    fill="url(#bg)"
+                    stroke="#b428b4"
+                    stroke-width="0"
+                    points={`290,102 ${computedPoints()} 0,102`} />
             </svg>
         </main>
     </>
