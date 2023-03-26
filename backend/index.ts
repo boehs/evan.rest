@@ -18,7 +18,7 @@ app.get('/time', async c => {
 })
 
 app.get('/asleep', async c => {
-  const isAsleep = (hour > 22 || hour < 7) && Date.now() - (await getHeartbeat(c.env))?.beat! > 1000 * 60 * 10
+  const isAsleep = (hour >= 22 || hour <= 7) && Date.now() - (await getHeartbeat(c.env))?.beat! > 1000 * 60 * 10
   if (isAsleep) return c.newResponse('yes!', 200)
   else return c.newResponse('no!')
 })

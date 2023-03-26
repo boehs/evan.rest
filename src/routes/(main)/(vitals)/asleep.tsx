@@ -5,7 +5,7 @@ import { NotLive } from "~/components/warnings"
 import { hb } from "~/routes/(main)"
 
 export const hour = Number((new Date()).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: '2-digit', hour12: false }).replace(/ AM| PM/, ''))
-export const isAsleep = () => (hour > 22 || hour < 7) && Date.now() - useRouteData<hb>().heartbeat()?.beat! > 1000 * 60 * 10
+export const isAsleep = () => (hour >= 22 || hour <= 7) && Date.now() - useRouteData<hb>().heartbeat()?.beat! > 1000 * 60 * 10
 
 export default function Asleep() {
   return <>
@@ -15,7 +15,7 @@ export default function Asleep() {
       <p>*If my computer is running, Every 10 minutes it sends a heartbeat.</p>
       <p>Generally, I'd say my sleeping hours are 10PM-7AM, so if my time is in that range *and* there hasn't been a heartbeat for more than 10 minutes, I'm probably asleep 😅</p>
       <Checklist list={[
-        [hour > 22 || hour < 7, '10PM-7AM'],
+        [hour >= 22 || hour <= 7, '10PM-7AM'],
         [Date.now() - useRouteData<hb>().heartbeat()?.beat! > 1000 * 60 * 10, 'More than 10 minutes']
       ]} />
     </main>
