@@ -15,21 +15,25 @@ export function routeData() {
 
 export default function Main() {
     const { battery } = useRouteData<typeof routeData>()
+    const computedPoints = () => battery()?.map(b => {
+        let be = JSON.parse(JSON.stringify(b))
+        be[0] = 288 - b[0]
+        be[1] = 102 - b[1]
+        return be.join(',')
+    }).join(' ')
+    console.log(computedPoints())
     return <>
         <main>
             <p>
                 My current laptop's battery level is <b>{(battery() || [[0,100]])[0][1]}%</b>.
                 Below is a graph of my battery level for the last 24 hours.
             </p>
-            <svg viewBox="0 0 288 100" class="chart">
+            <svg viewBox="0 0 288 102" class="chart">
                 <polyline
                     fill="none"
                     stroke="#b428b4"
                     stroke-width="2"
-                    points={battery()?.reverse().map(b => {
-                        b[1] = 100 - b[1]
-                        return b.join(',')
-                    }).join(' ')}/>
+                    points={computedPoints()}/>
             </svg>
         </main>
     </>
