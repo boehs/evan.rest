@@ -20,6 +20,7 @@ struct Track {
     url: String,
     #[serde(rename = "@attr")]
     attr: Option<Attr>,
+    image: Vec<Image>
 }
 
 #[derive(Deserialize, Debug)]
@@ -33,11 +34,19 @@ struct Attr {
     //nowplaying: String,
 }
 
+#[derive(Deserialize, Debug)]
+struct Image {
+    //size: String,
+    #[serde(rename = "#text")]
+    text: String
+}
+
 #[derive(Serialize, Debug)]
 pub struct Music {
     artist: String,
     track: String,
     url: String,
+    image: String
 }
 
 pub async fn get(client: &Client, env: &Env) -> Result<Option<Music>, reqwest::Error> {
@@ -62,6 +71,7 @@ pub async fn get(client: &Client, env: &Env) -> Result<Option<Music>, reqwest::E
             artist: last_fm_track.artist.text.to_owned(),
             track: last_fm_track.name.to_owned(),
             url: last_fm_track.url.to_owned(),
+            image: last_fm_track.image[2].text.to_owned()
         }),
         None => None,
     })

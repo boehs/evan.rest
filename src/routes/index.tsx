@@ -36,7 +36,7 @@ export default function Home() {
     vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago']],
     tech: [
       ['battery', () => heartbeat.loading ? '' : heartbeat()?.data.device.battery || '∞' ],
-      ['music', <Show when={heartbeat()?.data.music} fallback="🔇">
+      ['hack.fm', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
       //'session'

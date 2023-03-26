@@ -22,7 +22,8 @@ type Heartbeat = {
     music: {
       artist: string,
       track: string,
-      url: string
+      url: string,
+      image: string
     } | null
   }
 }

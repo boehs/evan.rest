@@ -1,5 +1,6 @@
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
+import Schema from "~/components/schema";
 
 export function routeData() {
     return {
@@ -40,10 +41,12 @@ export default function Main() {
                     points={computedPoints()} />
                 <polyline
                     fill="url(#bg)"
-                    stroke="#b428b4"
-                    stroke-width="0"
                     points={`288,102 ${computedPoints()} 0,102`} />
             </svg>
         </main>
+        <Schema routes={[
+            ["GET","battery/list", "Get the list of the battery things", "[Timestamp, Level%]"],
+            ["GET","battery", "Get my current battery level", "Level%"]
+        ]}/>
     </>
 }

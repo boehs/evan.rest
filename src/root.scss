@@ -5,7 +5,7 @@ body {
   color: #300030;
   display: grid;
   grid-template-rows: min-content 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 600px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
   gap: 0 30px;
   
   > * {
@@ -156,4 +156,15 @@ hr {
 
 svg {
   width: 100%;
+}
+
+img {
+  border-radius: 4px;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
 }
