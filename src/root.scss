@@ -110,7 +110,20 @@ section,
 .schema {
   border: 0;
   margin: 0;
+  padding: 0;
   grid-row: span 2;
+
+  p {
+    margin-top: 0;
+  }
+
+  h3, h4 {
+    margin-bottom: 0;
+  }
+
+  .warning {
+    margin: 0;
+  }
 }
 
 section {

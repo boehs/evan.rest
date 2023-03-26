@@ -18,7 +18,7 @@ export default function Music() {
         <main>
             <sup>Fondly known as hack.fm</sup>
             <p>
-                This is a list of songs I've listened to in the last 24 hours.
+                This is a (incomplete) list of songs I've listened to in the last 24 hours.
             </p>
             <For each={music()}>
                 {(song, i) => <div class="flex" style={{
@@ -40,7 +40,7 @@ export default function Music() {
                 </div>}
             </For>
             <p>
-                It's possible some songs are missing, or even duplicated.
+                It's possible some songs are missing. It's possible I skipped it.
                 The data only reflects the music I was listening to at the time of a heartbeat.
             </p>
         </main>
