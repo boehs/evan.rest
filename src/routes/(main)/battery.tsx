@@ -26,7 +26,10 @@ export default function Main() {
                     fill="none"
                     stroke="#b428b4"
                     stroke-width="2"
-                    points={battery()?.map(b => b.join(',')).join(' ')}/>
+                    points={battery()?.reverse().map(b => {
+                        b[1] = 100 - b[1]
+                        return b.join(',')
+                    }).join(' ')}/>
             </svg>
         </main>
     </>
