@@ -34,11 +34,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let env = envy::from_env::<Env>()?;
 
     println!("Fetching session data");
-
     let activity = activity_watch::get(&client, &env).await?;
 
     println!("Fetching music");
-
     let music = last_fm::get(&client, &env).await?;
 
     println!("Getting device statistics");

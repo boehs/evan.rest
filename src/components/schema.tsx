@@ -1,5 +1,4 @@
 import { For, JSX, Show } from "solid-js"
-import { A } from "solid-start"
 
 type method = 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE'
 

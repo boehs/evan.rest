@@ -25,7 +25,7 @@ export default function Main() {
     return <>
         <main>
             <p>
-                My laptop's current battery level is <b>{100 - (battery() || [[0, 100]])[0][1]}%</b>.
+                My laptop's current battery level is <b>{102 - (battery() || [[0, 100]])[0][1]}%</b>.
                 Below is a graph of my battery level for the last 24 hours.
             </p>
             <svg viewBox="0 0 288 102" class="chart">
