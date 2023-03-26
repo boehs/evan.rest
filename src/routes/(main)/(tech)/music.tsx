@@ -32,7 +32,7 @@ export default function Music() {
                         <h2 class={`${i() == 0 ? '' : 'small'}`} style={{
                             margin: 0,
                             "margin-bottom": "10px"
-                        }}><a href={song.track}>{song.track}</a></h2>
+                        }}><a href={song.url}>{song.track}</a></h2>
                         <p style={{
                             margin: 0
                         }}>{song.artist}</p>
