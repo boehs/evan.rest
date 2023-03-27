@@ -17,7 +17,10 @@ type Heartbeat = {
     sessionLength: number,
     device: {
       open: string,
-      battery: number | null
+      battery: {
+        level: number,
+        status: 'unknown' | 'charging' | 'discharging' | 'empty' | 'full'
+      }
     },
     music: {
       artist: string,

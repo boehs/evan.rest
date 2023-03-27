@@ -29,7 +29,7 @@ app.get('/battery', async c => {
 
 app.get('/battery/history', async c => {
   const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
-  const battery = beats?.filter(beat => beat.data.device.battery).map(beat => [beat.beat,beat.data.device.battery])
+  const battery = beats?.map(beat => [beat.beat,beat.data.device.battery])
   return c.jsonT(battery)
 })
 

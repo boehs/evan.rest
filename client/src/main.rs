@@ -40,14 +40,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let music = last_fm::get(&client, &env).await?;
 
     println!("Getting device statistics");
-
     let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
-
-    let battery = if battr.state() == battery::State::Discharging {
-        Some((battr.energy().value / battr.energy_full().value * 100.0) as i8)
-    } else {
-        None
-    };
+    let battery_level = (battr.energy().value / battr.energy_full().value * 100.0) as i8;
 
     println!("Wrapping Up");
 
@@ -55,7 +49,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
         "sessionLength": activity.session_length,
         "device":  {
            "open": activity.open,
-           "battery": battery,
+           "battery": {
+            "level": battery_level,
+            "status": battr.state().to_string()
+           },
            "os": env::consts::OS,
            "arch": env::consts::ARCH
         },
