@@ -47,7 +47,7 @@ export default function Main() {
         </main>
         <Schema routes={[
             ["GET","battery", "Get my current battery level", "Level%"],
-            ["GET","battery/history", "Get the list of the battery things", "[Timestamp, Level%][]"]
+            ["GET","battery/history", "Get the list of the battery things", "{ [timestamp: string]: { level: number, status: 'unknown' | 'charging' | 'discharging' | 'empty' | 'full' }"]
         ]}/>
     </>
 }

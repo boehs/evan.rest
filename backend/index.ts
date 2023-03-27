@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { prettyJSON } from 'hono/pretty-json'
 import { getHeartbeat } from "../lib/heartbeat"
 import { hour } from "~/routes/(main)/(vitals)/asleep"
 import { heartbeat } from "./heartbeat"
@@ -9,6 +10,8 @@ const app = new Hono<{
     PW: string
   },
 }>({strict: false})
+app.use('*', prettyJSON())
+
 app.route('',heartbeat)
 
 app.get('/time', async c => {
@@ -30,7 +33,7 @@ app.get('/battery', async c => {
 app.get('/battery/history', async c => {
   const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
   const battery = beats?.map(beat => [beat.beat,beat.data.device.battery])
-  return c.jsonT(battery)
+  return c.jsonT(Object.fromEntries(battery || []))
 })
 
 app.get('/music', async c => {
@@ -39,8 +42,8 @@ app.get('/music', async c => {
 
 app.get('/music/history', async c => {
   const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
-  const music = beats?.filter(beat => beat.data.music).map(beat => ({ time: beat.beat, ...beat.data.music! }))
-  return c.jsonT(music)
+  const music = beats?.filter(beat => beat.data.music).map(beat => ([beat.beat, beat.data.music!]))
+  return c.jsonT(Object.fromEntries(music || []))
 })
 
 export default app

@@ -47,7 +47,7 @@ export default function Music() {
         </main>
         <Schema routes={[
             ['GET','music',"Get the current song I'm listening to",'See heartbeat'],
-            ['GET','music/history',"Get my listening history",'{ time: timestamp, ...music }[]']
+            ['GET','music/history',"Get my listening history",'{ [timestamp: string]: music }']
         ]}/>
     </>
 }
