@@ -23,4 +23,8 @@ app.get('/asleep', async c => {
   else return c.newResponse('no!')
 })
 
+app.get('/battery', async c => {
+  return c.text(String((await getHeartbeat(c.env))?.data.device.battery))
+})
+
 export default app
