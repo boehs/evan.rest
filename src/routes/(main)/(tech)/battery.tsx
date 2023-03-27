@@ -46,8 +46,8 @@ export default function Main() {
             </svg>
         </main>
         <Schema routes={[
-            ["GET","battery/list", "Get the list of the battery things", "[Timestamp, Level%]"],
-            ["GET","battery", "Get my current battery level", "Level%"]
+            ["GET","battery", "Get my current battery level", "Level%"],
+            ["GET","battery/history", "Get the list of the battery things", "[Timestamp, Level%][]"]
         ]}/>
     </>
 }

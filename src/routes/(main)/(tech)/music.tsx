@@ -1,6 +1,7 @@
 import { For } from "solid-js"
 import { useRouteData } from "solid-start"
 import { createServerData$ } from "solid-start/server"
+import Schema from "~/components/schema"
 
 export function routeData() {
     return {
@@ -44,5 +45,9 @@ export default function Music() {
                 The data only reflects the music I was listening to at the time of a heartbeat.
             </p>
         </main>
+        <Schema routes={[
+            ['GET','music',"Get the current song I'm listening to",'See heartbeat'],
+            ['GET','music/history',"Get my listening history",'{ time: timestamp, ...music }[]']
+        ]}/>
     </>
 }

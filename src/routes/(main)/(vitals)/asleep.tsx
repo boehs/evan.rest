@@ -19,7 +19,7 @@ export default function Asleep() {
       ]} />
     </main>
     <Schema routes={[
-      ['GET', 'asleep', 'Check if I am likely asleep', "'yes!' (503) or 'no!' (200)"]
+      ['GET', 'asleep', 'Check if I am likely asleep', "true (503) or false (200)"]
     ]} />
   </>
 }

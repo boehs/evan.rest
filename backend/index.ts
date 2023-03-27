@@ -19,12 +19,28 @@ app.get('/time', async c => {
 
 app.get('/asleep', async c => {
   const isAsleep = (hour >= 22 || hour <= 7) && Date.now() - (await getHeartbeat(c.env))?.beat! > 1000 * 60 * 10
-  if (isAsleep) return c.newResponse('yes!', 200)
-  else return c.newResponse('no!')
+  if (isAsleep) return c.jsonT(true, 200)
+  else return c.jsonT(false, 503)
 })
 
 app.get('/battery', async c => {
-  return c.text(String((await getHeartbeat(c.env))?.data.device.battery))
+  return c.jsonT((await getHeartbeat(c.env)).data.device.battery)
+})
+
+app.get('/battery/history', async c => {
+  const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
+  const battery = beats?.filter(beat => beat.data.device.battery).map(beat => [beat.beat,beat.data.device.battery])
+  return c.jsonT(battery)
+})
+
+app.get('/music', async c => {
+  return c.jsonT((await getHeartbeat(c.env))?.data.music)
+})
+
+app.get('/music/history', async c => {
+  const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
+  const music = beats?.filter(beat => beat.data.music).map(beat => ({ time: beat.beat, ...beat.data.music! }))
+  return c.jsonT(music)
 })
 
 export default app
