@@ -19,8 +19,8 @@ app.get('/time', async c => {
 
 app.get('/asleep', async c => {
   const isAsleep = (hour >= 22 || hour <= 7) && Date.now() - (await getHeartbeat(c.env))?.beat! > 1000 * 60 * 10
-  if (isAsleep) return c.jsonT(true, 200)
-  else return c.jsonT(false, 503)
+  if (isAsleep) return c.jsonT(true, 503)
+  else return c.jsonT(false, 200)
 })
 
 app.get('/battery', async c => {
