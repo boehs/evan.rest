@@ -3,15 +3,15 @@ lockfileVersion: 5.4
 specifiers:
   '@cloudflare/workers-types': ^4.20230321.0
   '@solidjs/meta': ^0.28.2
-  '@solidjs/router': ^0.7.1
+  '@solidjs/router': ^0.8.2
   '@types/node': ^18.11.18
   esbuild: ^0.14.54
   hono: ^3.1.2
   postcss: ^8.4.21
   sass: ^1.59.3
   solid-js: ^1.6.11
-  solid-start: ^0.2.23
-  solid-start-cloudflare-pages: ^0.2.23
+  solid-start: 0.2.24
+  solid-start-cloudflare-pages: 0.2.24
   typescript: ^4.9.4
   undici: ^5.15.1
   vite: ^4.1.4
@@ -19,11 +19,11 @@ specifiers:
 
 dependencies:
   '@solidjs/meta': 0.28.2_solid-js@1.6.15
-  '@solidjs/router': 0.7.1_solid-js@1.6.15
+  '@solidjs/router': 0.8.2_solid-js@1.6.15
   hono: 3.1.2
   sass: 1.59.3
   solid-js: 1.6.15
-  solid-start: 0.2.23_5bemwode7qf4af6vpadtmh45fq
+  solid-start: 0.2.24_k5sttu3afzwmo4sgjiibbty7z4
   undici: 5.21.0
   wrangler: 2.13.0
 
@@ -32,7 +32,7 @@ devDependencies:
   '@types/node': 18.15.5
   esbuild: 0.14.54
   postcss: 8.4.21
-  solid-start-cloudflare-pages: 0.2.23_56rdvx36cvogm7gqo4fl2sycqq
+  solid-start-cloudflare-pages: 0.2.24_tte3tuy5dnb2c7vrbv4cn4niy4
   typescript: 4.9.5
   vite: 4.2.1_y7rghahg7ddu72pko63vhsxa44
 
@@ -2029,8 +2029,8 @@ packages:
     dependencies:
       solid-js: 1.6.15
 
-  /@solidjs/router/0.7.1_solid-js@1.6.15:
-    resolution: {integrity: sha512-wLE1GjZB/h9HmHMe+S4QBeS7FsjwlpkuNAJ0vOC5WFoyRECKS7sTrzPhGGJB9rxC4OMsXPwXDOXYQ599MMe0Dg==}
+  /@solidjs/router/0.8.2_solid-js@1.6.15:
+    resolution: {integrity: sha512-gUKW+LZqxtX6y/Aw6JKyy4gQ9E7dLqp513oB9pSYJR1HM5c56Pf7eijzyXX+b3WuXig18Cxqah4tMtF0YGu80w==}
     peerDependencies:
       solid-js: ^1.5.3
     dependencies:
@@ -3451,8 +3451,8 @@ packages:
       '@babel/types': 7.21.3
       solid-js: 1.6.15
 
-  /solid-start-cloudflare-pages/0.2.23_56rdvx36cvogm7gqo4fl2sycqq:
-    resolution: {integrity: sha512-tuP8k4dLd0RqIkYuiBS59lkJ6VDE/3NWCdcVY0/pwRbWX6kIsd81HJSuiec/VdAqt84RNAEHffPhXS2yYt5o2Q==}
+  /solid-start-cloudflare-pages/0.2.24_tte3tuy5dnb2c7vrbv4cn4niy4:
+    resolution: {integrity: sha512-gOt+Ka7+a4OBaMi/5DDkq95R5Ui4niSaSac0Mh0wkcq6W+dE44YOvyeWkE9pd8AJKQS3y7Hv3+1DygV1yLJW/Q==}
     peerDependencies:
       solid-start: '*'
       vite: '*'
@@ -3469,7 +3469,7 @@ packages:
       '@types/ws': 8.5.4
       miniflare: 2.12.2
       rollup: 3.20.0
-      solid-start: 0.2.23_5bemwode7qf4af6vpadtmh45fq
+      solid-start: 0.2.24_k5sttu3afzwmo4sgjiibbty7z4
       terser: 5.16.6
       vite: 4.2.1_y7rghahg7ddu72pko63vhsxa44
       ws: 8.13.0
@@ -3480,12 +3480,12 @@ packages:
       - ioredis
       - utf-8-validate
 
-  /solid-start/0.2.23_5bemwode7qf4af6vpadtmh45fq:
-    resolution: {integrity: sha512-dKTRFtpjskHFyLq9n6oJxqWHYL7H8w14y4+OgIR+57+lqb1N7289kZLTHrzWxWyzDkIG9V1s2MQtiDfIaBP/MQ==}
+  /solid-start/0.2.24_k5sttu3afzwmo4sgjiibbty7z4:
+    resolution: {integrity: sha512-7nbl4mRiWwts7KN4ep1vT4eRcjacB6StdP/JalaCWtovpX0EctcEwXpJQeHKkGCL+J0n3M+aph0qkzUyJ5tD6Q==}
     hasBin: true
     peerDependencies:
       '@solidjs/meta': ^0.28.0
-      '@solidjs/router': ^0.7.0
+      '@solidjs/router': ^0.8.2
       solid-js: ^1.6.2
       solid-start-aws: '*'
       solid-start-cloudflare-pages: '*'
@@ -3521,7 +3521,7 @@ packages:
       '@babel/preset-typescript': 7.21.0_@babel+core@7.21.3
       '@babel/template': 7.20.7
       '@solidjs/meta': 0.28.2_solid-js@1.6.15
-      '@solidjs/router': 0.7.1_solid-js@1.6.15
+      '@solidjs/router': 0.8.2_solid-js@1.6.15
       '@types/cookie': 0.5.1
       chokidar: 3.5.3
       compression: 1.7.4
@@ -3543,7 +3543,7 @@ packages:
       set-cookie-parser: 2.6.0
       sirv: 2.0.2
       solid-js: 1.6.15
-      solid-start-cloudflare-pages: 0.2.23_56rdvx36cvogm7gqo4fl2sycqq
+      solid-start-cloudflare-pages: 0.2.24_tte3tuy5dnb2c7vrbv4cn4niy4
       terser: 5.16.6
       undici: 5.21.0
       vite: 4.2.1_y7rghahg7ddu72pko63vhsxa44
