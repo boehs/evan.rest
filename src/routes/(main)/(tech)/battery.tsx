@@ -8,7 +8,7 @@ export function routeData() {
             const beats = await (env as Bindings).RESTFUL.get<Heartbeat[]>('heartbeat', "json")
             const ranges = beats?.map(beat => [
                 Math.round((Date.now() - beat.beat) / 1000 / 60 / 5),
-                beat.data.device.battery.level])
+                typeof beat.data.device.battery == 'number' ? beat.data.device.battery : beat.data.device.battery.level])
             const forSvg = ranges?.map(beat => {
                 beat[0] = 288 - beat[0]
                 beat[1] = 102 - beat[1]
