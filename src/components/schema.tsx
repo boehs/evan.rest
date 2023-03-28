@@ -9,9 +9,10 @@ export default function Schema(props: {
       [param: string]: string
     },
     protected?: boolean
-  }, string | JSX.Element][]
+  }, string | JSX.Element][],
+  only?: boolean
 }) {
-  return <section class="schema">
+  return <section class={`schema${props.only == undefined || props.only == true ? ' c2' : ''}`}>
     <h2>API</h2>
     <For each={props.routes}>
       {([method, route, options, returns]) => <>

@@ -107,11 +107,22 @@ section,
   --border: #e54a36;
 }
 
+.c2 {
+  grid-row: span 2;
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
 .schema {
   border: 0;
   margin: 0;
   padding: 0;
-  grid-row: span 2;
 
   p {
     margin-top: 0;

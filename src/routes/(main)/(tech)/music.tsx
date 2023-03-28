@@ -13,8 +13,23 @@ export function routeData() {
     }
 }
 
+function sbfard(array: (string | number)[]) {
+    let frequency: Record<string | number, number> = {}, value;
+    for (let i = 0; i < array.length; i++) {
+        value = array[i];
+        if (value in frequency) {
+            frequency[value]++;
+        }
+        else {
+            frequency[value] = 1;
+        }
+    }
+    return [...new Set(array)].sort((a, b) => frequency[b] - frequency[a]);
+}
+
 export default function Music() {
     const { music } = useRouteData<typeof routeData>()
+    const artists = () => music() ? sbfard(music()!.map(m => m.artist)!) : []
     return <>
         <main>
             <sup>Fondly known as hack.fm</sup>
@@ -45,9 +60,17 @@ export default function Music() {
                 The data only reflects the music I was listening to at the time of a heartbeat.
             </p>
         </main>
-        <Schema routes={[
-            ['GET','music',"Get the current song I'm listening to",'See heartbeat'],
-            ['GET','music/history',"Get my listening history",'{ [timestamp: string]: music }']
-        ]}/>
+        <aside class="c2">
+            <h2>Top Artists</h2>
+            <ol>
+                <For each={artists()}>
+                    {artist => <li>{artist}</li>}
+                </For>
+            </ol>
+            <Schema routes={[
+                ['GET', 'music', "Get the current song I'm listening to", 'See heartbeat'],
+                ['GET', 'music/history', "Get my listening history", '{ [timestamp: string]: music }']
+            ]} only={false} />
+        </aside>
     </>
 }
