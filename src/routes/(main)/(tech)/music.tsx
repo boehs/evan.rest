@@ -24,7 +24,7 @@ function sbfard(array: (string | number)[]) {
             frequency[value] = 1;
         }
     }
-    return [...new Set(array)].sort((a, b) => frequency[b] - frequency[a]);
+    return [...new Set(array)].sort((a, b) => frequency[b] - frequency[a]).filter(v => frequency[v] > 1);
 }
 
 export default function Music() {
