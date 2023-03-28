@@ -24,7 +24,7 @@ function sbfard(array: (string | number)[]) {
             frequency[value] = 1;
         }
     }
-    return [...new Set(array)].sort((a, b) => frequency[b] - frequency[a]);
+    return [...new Set(array)].sort((a, b) => frequency[b] - frequency[a]).filter(v => frequency[v] > 1).filter(v => frequency[v] > 1);
 }
 
 export default function Music() {
@@ -37,7 +37,7 @@ export default function Music() {
                 This is a (incomplete) list of songs I've listened to in the last 24 hours.
             </p>
             <For each={music()}>
-                {(song, i) => <div class="flex card" style={{'--i': (i() / 1.5)}}>
+                {(song, i) => <div class="flex card">
                     <img src={song.image} style={{
                         height: i() == 0 ? '120px' : '75px'
                     }} />
