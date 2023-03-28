@@ -37,10 +37,7 @@ export default function Music() {
                 This is a (incomplete) list of songs I've listened to in the last 24 hours.
             </p>
             <For each={music()}>
-                {(song, i) => <div class="flex" style={{
-                    "align-items": "flex-end",
-                    "margin-block": "1em"
-                }}>
+                {(song, i) => <div class="flex card" style={{'--i': (i() / 1.5)}}>
                     <img src={song.image} style={{
                         height: i() == 0 ? '120px' : '75px'
                     }} />

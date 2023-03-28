@@ -13,6 +13,10 @@ body {
   }
 }
 
+:root {
+  --i: 0;
+}
+
 pre {
   font-weight: bold;
   position: relative;
@@ -191,4 +195,21 @@ img {
 .flex {
   display: flex;
   gap: 1em;
+}
+
+.card {
+  align-items: flex-end;
+  margin-block: 1em;
+  animation: 640ms cubic-bezier(0.68,-0.55,0.27,1.55) calc((var(--i) * 200ms) + 40ms) backwards left;
+}
+
+@keyframes left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
