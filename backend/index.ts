@@ -36,6 +36,27 @@ app.get('/battery/history', async c => {
   return c.jsonT(Object.fromEntries(battery || []))
 })
 
+app.get('/battery/ranges', async c => {
+  const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
+  const battery = beats?.map(beat => [beat.beat,beat.data.device.battery] as const).reverse().filter(beat => typeof beat[1] == 'object')!
+
+  type status = Heartbeat['data']['device']['battery']['status']
+
+  let constructed: Partial<Record<status,[number][]>> = {}
+  let prevStatus: status = battery[0][1].status = battery[0][1].status
+  constructed[prevStatus] = [[battery[0][0]]]
+  
+  battery.forEach(([timestamp,{status}],i) => {
+    if (!constructed[status]) constructed[status] = []
+    if (status != prevStatus) {
+      constructed[prevStatus]![constructed[prevStatus]!.length-1].push(battery[i-1][0])
+      constructed[status]?.push([timestamp])
+      prevStatus = status
+    }
+  })
+  return c.jsonT(constructed)
+})
+
 app.get('/music', async c => {
   return c.jsonT((await getHeartbeat(c.env))?.data.music)
 })
