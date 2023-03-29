@@ -30,3 +30,9 @@ type Heartbeat = {
     } | null
   }
 }
+
+type Go = {
+  created: number,
+  to: string,
+  clicks: number[]
+}

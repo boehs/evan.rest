@@ -7,14 +7,15 @@ body {
   grid-template-rows: min-content 1fr;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
   gap: 0 30px;
-  
-  > * {
+
+  >* {
     max-width: 600px;
   }
 }
 
 :root {
   --i: 0;
+  --accent: #e15be1;
 }
 
 pre {
@@ -24,7 +25,7 @@ pre {
   white-space: pre-wrap;
   max-width: 100%;
   overflow: auto;
-  
+
   &.logo {
     white-space: pre;
     overflow: auto;
@@ -55,12 +56,14 @@ nav {
     display: inline;
     margin: 0;
   }
+
   p {
     max-width: 600px;
   }
 }
 
-sup,.sup {
+sup,
+.sup {
   color: gray;
   font-size: 15px;
   margin-top: 0;
@@ -71,9 +74,9 @@ sup,.sup {
     color: whitesmoke;
     background-color: rgb(32 29 32);
   }
-  
+
   a {
-    color: #e15be1;
+    color: var(--accent);
   }
 }
 
@@ -83,14 +86,34 @@ sup,.sup {
   }
 }
 
-button {
+button,
+input {
   font-family: inherit;
   font-size: inherit;
-  border: 1px solid #555;
+  border: 2px solid #555;
+  background: none;
   border-radius: 4px;
+  color: inherit;
   cursor: pointer;
   text-transform: lowercase;
+  font-style: italic;
+  padding: 5px 10px;
 }
+
+input[type="text"]:focus {
+  cursor: text;
+}
+
+button:hover,
+input:hover {
+  border: 2px solid var(--accent);
+}
+
+button:focus, input:focus {
+  outline: 0;
+  border: 2px solid #e57736;
+}
+
 
 section,
 .warning {
@@ -108,7 +131,7 @@ section,
 }
 
 .error {
-  --border: #e54a36;
+  color: #e54a36;
 }
 
 .c2 {
@@ -132,7 +155,8 @@ section,
     margin-top: 0;
   }
 
-  h3, h4 {
+  h3,
+  h4 {
     margin-bottom: 0;
   }
 
@@ -142,13 +166,14 @@ section,
 }
 
 section {
+
   h3,
-  h3 + p {
+  h3+p {
     padding-inline-start: 20px;
   }
 
   h4,
-  h4 + p {
+  h4+p {
     padding-inline-start: 40px;
   }
 
@@ -164,13 +189,13 @@ section {
 main {
   grid-row: 2;
   grid-column: 1;
-  
+
   pre:first-child {
     margin-top: 0;
   }
 }
 
-footer > p {
+footer>p {
   margin-block: 0;
 }
 

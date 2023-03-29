@@ -42,6 +42,9 @@ export default function Home() {
       //'session'
     ],
     //transcend: [['windchime', '🎐']],
+    tools: [
+      ['go', 'away']
+    ]
   }
 
   return <main>

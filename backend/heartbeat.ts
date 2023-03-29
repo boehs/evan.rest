@@ -15,7 +15,6 @@ app.get('/heartbeat', async c => {
 const day = 86400000 as const
 
 app.post('/heartbeat', async c => {
-  console.log(c.env.PW, c.req.headers.get('Authorization'))
   if (c.req.headers.get('Authorization') == c.env.PW) {
     const allBeats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
     const filtered = (allBeats || []).filter(beat => Date.now() < beat.beat + day)
