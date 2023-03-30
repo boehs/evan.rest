@@ -48,7 +48,6 @@ export default function Home() {
   }
 
   return <main>
-    <Title>Home</Title>
     <Logo />
     <p class="sup">{messages[messages.length * Math.random() | 0]}</p>
     <For each={Object.entries(routes)}>

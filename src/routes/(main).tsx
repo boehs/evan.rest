@@ -1,5 +1,5 @@
 import { getHeartbeat } from "../../lib/heartbeat"
-import { A, Outlet, useLocation } from "solid-start"
+import { A, Outlet, Title, useLocation } from "solid-start"
 import { createServerData$ } from "solid-start/server"
 
 export function routeData() {
@@ -13,9 +13,11 @@ export function routeData() {
 export type hb = typeof routeData
 
 export default function Main() {
+  const url = () => useLocation().pathname.split('/').slice(-1)
+
   return <>
     <nav>
-      <A href="/">{'<'} Back</A> &bull; <h1>{useLocation().pathname.split('/').slice(-1)}</h1>
+      <A href="/">{'<'} Back</A> &bull; <h1>{url()}</h1>
     </nav>
     <Outlet />
   </>
