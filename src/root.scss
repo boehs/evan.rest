@@ -5,7 +5,7 @@ body {
   color: #300030;
   display: grid;
   grid-template-rows: min-content 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 525px), 1fr));
   gap: 0 30px;
 
   >* {
@@ -116,8 +116,6 @@ section,
   border: 3px solid var(--border);
   border-radius: 5px;
 
-  max-width: 600px;
-
   padding: 20px;
   margin-block: 2em;
 }
@@ -162,7 +160,6 @@ section,
 }
 
 section {
-
   h3,
   h3+p {
     padding-inline-start: 20px;
