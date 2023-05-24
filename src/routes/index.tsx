@@ -6,7 +6,7 @@ import Footer from "~/components/foot"
 import Logo from "~/components/logo"
 import { Time } from "./(main)/(vitals)/time"
 import { isAsleep } from "./(main)/(vitals)/asleep"
-import { mAgo } from "./(main)/(vitals)/heartbeat"
+import { mAgo } from "./(main)/(tech)/heartbeat"
 import { run } from "../../backend/weather"
 
 const messages = [
