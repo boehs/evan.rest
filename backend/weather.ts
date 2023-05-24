@@ -55,10 +55,10 @@ export const normalizeDesc = (imp: string): [descTypeOutput, string] | [string, 
     let m = imp.match(/.*\/(.*)\?/)
     if (m && m[1] != undefined) {
         let p: descTypeOutput | undefined = descTypes[m[1] as keyof typeof descTypes]
-        if (p != undefined) return [p,m[1]]
-        else return [m[1],normalizeStatus.Original]
+        if (p != undefined) return [p, m[1]]
+        else return [m[1], normalizeStatus.Original]
     }
-    return [undefined,normalizeStatus.BadInput]
+    return [undefined, normalizeStatus.BadInput]
 }
 
 export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: number, windSpeed: number) {
@@ -67,15 +67,15 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
 
     let desc = imp[0]
 
-    if (['Tornado','Hurricane'].includes(desc)) return 'twirlblast'
+    if (['Tornado', 'Hurricane'].includes(desc)) return 'twirlblast'
 
     if (desc == 'Dust') return 'drouth'
 
     if ((desc == 'Fair/clear' || desc == 'Hot') && temp >= 32) return 'hellish'
-    if (["Fair/clear","Fair/clear and windy"].includes(desc) && temp < 0) return 'foxy'
-    if (['skc','few','sct','bkn','ovc'].includes(imp[1])) {
+    if (["Fair/clear", "Fair/clear and windy"].includes(desc) && temp < 0) return 'foxy'
+    if (temp >= 23 && temp <= 30 && ['skc', 'few'].includes(imp[1])) return 'balmy'
+    if (['skc', 'few', 'sct', 'bkn', 'ovc'].includes(imp[1])) {
         if (temp >= 20 && temp < 23) return 'clement'
-        if (temp >= 23 && temp <= 30) return 'balmy'
         if (temp < -5) return 'snell'
     }
 
@@ -88,17 +88,15 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
     // (of the weather) unpleasantly cold or wet.
     // TODO: Better
     if (desc == 'Tropical storm') return 'inclement'
-
     if (desc == 'Thunderstorm') return 'swullocking'
 
-
-    if (['Sleet','Snow', 'Snow/sleet', 'Freezing rain/snow', 'Rain/snow'].includes(desc)) return 'blenky'
+    if (['Sleet', 'Snow', 'Snow/sleet', 'Freezing rain/snow', 'Rain/snow'].includes(desc)) return 'blenky'
 
     // “Gleamy” is more optimistic, noting occasional intervals of sunshine amid the gloom.
     if (desc == 'Mostly cloudy') return 'gleamy'
 
     // characterized by strong winds.
-    if (["wind_skc","wind_few","wind_sct","wind_bkn","wind_ovc"].includes(imp[1]) && windSpeed > 25) return 'blustery'
+    if (["wind_skc", "wind_few", "wind_sct", "wind_bkn", "wind_ovc"].includes(imp[1]) && windSpeed > 25) return 'blustery'
 
     if (desc == 'Rain') return 'Deluge'
 
@@ -110,8 +108,8 @@ export function run(imp: Heartbeat) {
     const parsed = normalizeDesc(w.icon!) || [w.desc, normalizeStatus.Original]
     const word = getWeatherDesc(parsed, w.temp, w.speed)
     return {
-      word: word,
-      temp: w.temp,
-      desc: parsed[0]
+        word: word,
+        temp: w.temp,
+        desc: parsed[0]
     }
 }
