@@ -1,4 +1,5 @@
 mod activity_watch;
+mod weather;
 mod last_fm;
 
 use std::{error::Error, path::PathBuf, env};
@@ -19,7 +20,8 @@ pub struct Env {
     aw_session_bucket: String,
     lastfm_user: String,
     lastfm_key: String,
-    pw: String
+    pw: String,
+    weather_station: String
 }
 
 #[tokio::main]
@@ -39,6 +41,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("Fetching music");
     let music = last_fm::get(&client, &env).await?;
 
+    println!("Fetching weather");
+    let weather = weather::get(&client, &env).await?;
+
     println!("Getting device statistics");
     let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
     let battery_level = (battr.energy().value / battr.energy_full().value * 100.0) as i8;
@@ -57,6 +62,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
            "arch": env::consts::ARCH
         },
         "music": music,
+        "weather": weather
     });
 
     println!("{}", completed);

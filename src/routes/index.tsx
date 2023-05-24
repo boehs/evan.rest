@@ -1,12 +1,13 @@
 import { getHeartbeat } from "../../lib/heartbeat"
 import { For, Show } from "solid-js"
-import { A, Title, useRouteData } from "solid-start"
+import { A, useRouteData } from "solid-start"
 import { createServerData$ } from "solid-start/server"
 import Footer from "~/components/foot"
 import Logo from "~/components/logo"
 import { Time } from "./(main)/(vitals)/time"
 import { isAsleep } from "./(main)/(vitals)/asleep"
 import { mAgo } from "./(main)/(vitals)/heartbeat"
+import { run } from "../../backend/weather"
 
 const messages = [
   "Now with 100% less caffeine",
@@ -33,7 +34,12 @@ export default function Home() {
   const { heartbeat } = useRouteData<typeof routeData>()
   const routes = {
     basic: [['ping', 'pong'], 'about'],
-    vitals: [['time', <Time />], ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>], ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago']],
+    vitals: [
+      ['time', <Time />],
+      ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>],
+      ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],
+      ['weather', () => heartbeat()! ? run(heartbeat()!).word : '']
+    ],
     tech: [
       ['battery', () => heartbeat.loading ? '' : `${heartbeat()?.data.device.battery.level}% and ${heartbeat()?.data.device.battery.status}` ],
       ['music', <Show when={heartbeat()?.data.music} fallback="🔇">

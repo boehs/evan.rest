@@ -40,7 +40,7 @@ export const descTypes = {
 
 type descTypeOutput = typeof descTypes[keyof typeof descTypes]
 
-enum normalizeStatus {
+export enum normalizeStatus {
     Remapped,
     Original,
     BadInput
@@ -71,7 +71,7 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
 
     if (desc == 'Dust') return 'drouth'
 
-    if (desc == 'Fair/clear' || desc == 'Hot' && temp >= 32) return 'hellish'
+    if ((desc == 'Fair/clear' || desc == 'Hot') && temp >= 32) return 'hellish'
     if (["Fair/clear","Fair/clear and windy"].includes(desc) && temp < 0) return 'foxy'
     if (['skc','few','sct','bkn','ovc'].includes(imp[1])) {
         if (temp >= 20 && temp < 23) return 'clement'
@@ -103,4 +103,15 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
     if (desc == 'Rain') return 'Deluge'
 
     return imp[1]
+}
+
+export function run(imp: Heartbeat) {
+    const w = imp.data.weather
+    const parsed = normalizeDesc(w.icon!) || [w.desc, normalizeStatus.Original]
+    const word = getWeatherDesc(parsed, w.temp, w.speed)
+    return {
+      word: word,
+      temp: w.temp,
+      desc: parsed[0]
+    }
 }

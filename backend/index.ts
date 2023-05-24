@@ -3,17 +3,17 @@ import { prettyJSON } from 'hono/pretty-json'
 import { getHeartbeat } from "../lib/heartbeat"
 import { hour } from "~/routes/(main)/(vitals)/asleep"
 import { heartbeat } from "./heartbeat"
-import { getWeatherDesc, normalizeDesc } from './weather'
+import { run } from './weather'
 
 const app = new Hono<{
   Bindings: {
     RESTFUL: KVNamespace,
     PW: string
   },
-}>({strict: false})
+}>({ strict: false })
 app.use('*', prettyJSON())
 
-app.route('',heartbeat)
+app.route('', heartbeat)
 
 app.get('/time', async c => {
   return c.text((new Date()).toLocaleTimeString(undefined, {
@@ -33,7 +33,7 @@ app.get('/battery', async c => {
 
 app.get('/battery/history', async c => {
   const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
-  const battery = beats?.map(beat => [beat.beat,beat.data.device.battery])
+  const battery = beats?.map(beat => [beat.beat, beat.data.device.battery])
   return c.jsonT(Object.fromEntries(battery || []))
 })
 
@@ -47,15 +47,10 @@ app.get('/music/history', async c => {
   return c.jsonT(Object.fromEntries(music || []))
 })
 
-app.get('/weather', async c => {
-  const w = (await getHeartbeat(c.env))?.data.weather
-  const parsed = normalizeDesc(w.icon)
-  const word = getWeatherDesc(parsed, w.temp, w.speed)
-  return c.jsonT({
-    word: word,
-    temp: w.temp,
-    desc: parsed
-  })
-})
+app.get('/weather', async c => c.jsonT(
+  run(
+    (await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json'))![0]
+  )
+))
 
 export default app

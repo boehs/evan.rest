@@ -29,7 +29,8 @@ type Heartbeat = {
       image: string
     } | null,
     weather: {
-      icon: string,
+      icon: string | null,
+      desc: string,
       speed: number,
       temp: number
     }

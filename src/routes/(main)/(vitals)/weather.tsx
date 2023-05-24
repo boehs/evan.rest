@@ -1,6 +1,13 @@
+import { run } from "../../../../backend/weather";
+import { useRouteData } from "solid-start";
 import Schema from "~/components/schema";
+import { hb } from "~/routes/(main)";
 
 export default function Weather() {
+    const { heartbeat } = useRouteData<hb>()
+    const processed = () => {
+        if (heartbeat()) return run(heartbeat()!)
+    }
     return <>
         <main>
             <sup>The IrrelEVANt Weather Network</sup>
@@ -8,10 +15,10 @@ export default function Weather() {
                 but instead of "Partly Cloudy" you get antiquated words
                 from a 500 year old dictionary?</p>
             <hr/>
-            <p>Outside it is <b>Hellish</b></p>
+            <p>Outside it is <b>{processed()?.word}</b></p>
             <p>
                 This is a good assessment,
-                given that it is <b>30</b>°C, <b>Humid</b>, and <b>Sunny</b>
+                given that it is <b>{processed()?.temp}</b>°C and <b>{processed()?.desc?.toLocaleLowerCase()}</b> right where I am.
             </p>
             <hr/>
             <p>
