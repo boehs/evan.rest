@@ -3,6 +3,7 @@ import { prettyJSON } from 'hono/pretty-json'
 import { getHeartbeat } from "../lib/heartbeat"
 import { hour } from "~/routes/(main)/(vitals)/asleep"
 import { heartbeat } from "./heartbeat"
+import { getWeatherDesc, normalizeDesc } from './weather'
 
 const app = new Hono<{
   Bindings: {
@@ -44,6 +45,17 @@ app.get('/music/history', async c => {
   const beats = await c.env.RESTFUL.get<Heartbeat[]>('heartbeat', 'json')
   const music = beats?.filter(beat => beat.data.music).map(beat => ([beat.beat, beat.data.music!]))
   return c.jsonT(Object.fromEntries(music || []))
+})
+
+app.get('/weather', async c => {
+  const w = (await getHeartbeat(c.env))?.data.weather
+  const parsed = normalizeDesc(w.icon)
+  const word = getWeatherDesc(parsed, w.temp, w.speed)
+  return c.jsonT({
+    word: word,
+    temp: w.temp,
+    desc: parsed
+  })
 })
 
 export default app
