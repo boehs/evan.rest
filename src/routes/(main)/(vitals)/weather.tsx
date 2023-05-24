@@ -11,9 +11,11 @@ export default function Weather() {
     return <>
         <main>
             <sup>The IrrelEVANt Weather Network</sup>
-            <p>Wouldn't it be fun if you took the weather channel,
+            <p>Wouldn't it be fun if you took the weather channel
                 but instead of "Partly Cloudy" you get antiquated words
-                from a 500 year old dictionary?</p>
+                from a 500 year old dictionary?
+            </p>
+            <sup>- Sun Tzu, The Art of War</sup>
             <hr/>
             <p>Outside it is <b>{processed()?.word}</b></p>
             <p>
