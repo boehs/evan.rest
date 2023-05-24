@@ -26,7 +26,7 @@ export default function Weather() {
             </p>
         </main>
         <Schema routes={[
-            ["GET","weather", "Get the weather where I am", '{ word: string, temp: number (°C), desc: string }'],
+            ["GET","weather", "To get the weather", '{ word: string, temp: number (°C), desc: string }'],
         ]}/>
     </>
 }
