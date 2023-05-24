@@ -37,10 +37,10 @@ export default function Home() {
     vitals: [
       ['time', <Time />],
       ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>],
-      ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],
       ['weather', () => heartbeat()! ? run(heartbeat()!).word : '']
     ],
     tech: [
+      ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],
       ['battery', () => heartbeat.loading ? '' : `${heartbeat()?.data.device.battery.level}% and ${heartbeat()?.data.device.battery.status}` ],
       ['music', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>

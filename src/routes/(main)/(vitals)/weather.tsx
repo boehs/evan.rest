@@ -6,7 +6,11 @@ import { hb } from "~/routes/(main)";
 export default function Weather() {
     const { heartbeat } = useRouteData<hb>()
     const processed = () => {
-        if (heartbeat()) return run(heartbeat()!)
+        if (!heartbeat()) return
+        let p = run(heartbeat()!)
+        //p.word = p.word!.charAt(0).toUpperCase() + p.word!.slice(1);
+        p.desc = p.desc?.toLocaleLowerCase()
+        return p
     }
     return <>
         <main>
@@ -20,7 +24,7 @@ export default function Weather() {
             <p>Outside it is <b>{processed()?.word}</b></p>
             <p>
                 This is a good assessment,
-                given that it is <b>{processed()?.temp}</b>°C and <b>{processed()?.desc?.toLocaleLowerCase()}</b> right where I am.
+                given that it is <b>{processed()?.temp}</b>°C and <b>{processed()?.desc}</b> right where I am.
             </p>
             <hr/>
             <p>
