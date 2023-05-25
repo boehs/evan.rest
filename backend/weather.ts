@@ -93,7 +93,9 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
     if (['Sleet', 'Snow', 'Snow/sleet', 'Freezing rain/snow', 'Rain/snow'].includes(desc)) return 'blenky'
 
     // “Gleamy” is more optimistic, noting occasional intervals of sunshine amid the gloom.
-    if (desc == 'Mostly cloudy') return 'gleamy'
+    if (desc == 'Mostly cloudy' || desc == 'Partly cloudy') return 'gleamy'
+
+    if (desc == 'Overcast') return 'leaden'
 
     // characterized by strong winds.
     if (["wind_skc", "wind_few", "wind_sct", "wind_bkn", "wind_ovc"].includes(imp[1]) && windSpeed > 25) return 'blustery'
