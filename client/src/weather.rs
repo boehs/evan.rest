@@ -22,15 +22,16 @@ struct Tempature {
     value: f32,
 }
 
+// Why is this null sometimes (via api not my fault but why)
 #[derive(Deserialize, Debug)]
 struct Wind {
-    value: f32,
+    value: Option<f32>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct ToSend {
     temp: f32,
-    wind: f32,
+    wind: Option<f32>,
     icon: Option<String>,
     desc: String
 }
