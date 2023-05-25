@@ -4,7 +4,8 @@ import { createServerData$ } from "solid-start/server"
 export function routeData(e: RouteDataArgs) {
     return {
         activity: createServerData$(async (_, { env }) => {
-            return (await (env as Bindings).RESTFUL.get<Heartbeat[]>('heartbeat', "json"))?.find((e) => e.data.activity.steps)
+            let hb = (await (env as Bindings).RESTFUL.get<Heartbeat[]>('heartbeat', "json"))!.find((e) => e.data.activity?.steps != null)
+            if (hb) return hb.data.activity
         })
     }
 }
@@ -14,7 +15,7 @@ export default function Steps() {
     return <>
         <main>
             <p>How many steps have I taken today?</p>
-            <p><b>{activity()?.data.activity.steps}</b> steps and <b>{activity()?.data.activity.floors}</b> flights of stairs is how many!</p>
+            <p><b>{activity()?.steps}</b> steps and <b>{activity()?.floors}</b> flights of stairs is how many!</p>
             <hr />
             <p>
                 This statistic is provided through a reverse engineered garmin connect
