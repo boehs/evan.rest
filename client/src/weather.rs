@@ -44,5 +44,5 @@ pub async fn get(client: &Client, env: &Env) -> Result<ToSend, reqwest::Error> {
     let w_res = r
         .json::<Res>()
         .await?.properties;
-    Ok(ToSend { temp: w_res.temperature.value, wind: w_res.wind_speed.value, icon: w_res.icon, desc: w_res.text_description })
+    Ok(ToSend { temp: (w_res.temperature.value * 10.0).round() / 10.0, wind: w_res.wind_speed.value, icon: w_res.icon, desc: w_res.text_description })
 }
