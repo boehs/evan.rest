@@ -19,19 +19,19 @@ struct Properties {
 
 #[derive(Deserialize, Debug)]
 struct Tempature {
-    value: f32,
+    value: f64,
 }
 
 // Why is this null sometimes (via api not my fault but why)
 #[derive(Deserialize, Debug)]
 struct Wind {
-    value: Option<f32>,
+    value: Option<f64>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct ToSend {
-    temp: f32,
-    wind: Option<f32>,
+    temp: f64,
+    wind: Option<f64>,
     icon: Option<String>,
     desc: String
 }
@@ -44,5 +44,5 @@ pub async fn get(client: &Client, env: &Env) -> Result<ToSend, reqwest::Error> {
     let w_res = r
         .json::<Res>()
         .await?.properties;
-    Ok(ToSend { temp: (w_res.temperature.value * 10.0).round() / 10.0, wind: w_res.wind_speed.value, icon: w_res.icon, desc: w_res.text_description })
+    Ok(ToSend { temp: w_res.temperature.value, wind: w_res.wind_speed.value, icon: w_res.icon, desc: w_res.text_description })
 }

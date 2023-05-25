@@ -8,7 +8,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 525px), 1fr));
   gap: 0 30px;
 
-  >* {
+  > * {
     max-width: 600px;
   }
 }
@@ -94,22 +94,20 @@ input {
   text-transform: lowercase;
   font-style: italic;
   padding: 5px 10px;
+
+  &:hover {
+    border: 2px solid var(--accent);
+  }
+
+  &:focus {
+    outline: 0;
+    border: 2px solid #e57736;
+  }
 }
 
 input[type="text"]:focus {
   cursor: text;
 }
-
-button:hover,
-input:hover {
-  border: 2px solid var(--accent);
-}
-
-button:focus, input:focus {
-  outline: 0;
-  border: 2px solid #e57736;
-}
-
 
 section,
 .warning {
@@ -160,13 +158,14 @@ section,
 }
 
 section {
+
   h3,
-  h3+p {
+  h3 + p {
     padding-inline-start: 20px;
   }
 
   h4,
-  h4+p {
+  h4 + p {
     padding-inline-start: 40px;
   }
 
@@ -188,7 +187,7 @@ main {
   }
 }
 
-footer>p {
+footer > p {
   margin-block: 0;
 }
 
