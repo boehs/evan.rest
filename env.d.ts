@@ -33,6 +33,10 @@ type Heartbeat = {
       desc: string,
       speed: number,
       temp: number
+    },
+    activity: {
+      steps: number | null,
+      floors: number | null
     }
   }
 }

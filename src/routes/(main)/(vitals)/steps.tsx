@@ -1,26 +1,22 @@
+import { useRouteData } from "solid-start"
+import { hb } from "~/routes/(main)"
+
 export default function Steps() {
+    const { heartbeat } = useRouteData<hb>()
     return <>
         <main>
             <p>How many steps have I taken today?</p>
-            <p><b>8,102</b> is how many!</p>
+            <p><b>{heartbeat()?.data.activity.steps}</b> steps and <b>{heartbeat()?.data.activity.floors}</b> flights of stairs is how many!</p>
+            <hr/>
             <p>
-                Actually, that was a lie! This statistic is <i>made up</i>.
-                I do have a flashy step counter, but it has no proper API and
-                given the price I paid for it, I'm skirmish reversing the app.
+                This statistic is provided through a reverse engineered garmin connect
+                API. I didn't want to reverse engineer it, who wants to put such a valuable
+                account at risk, but... funsies?
             </p>
             <p>
-                Actually, that's also a lie. I <i>have</i> already found the endpoints,
-                just automated requests are a lil sketch.
-            </p>
-            <p>
-                Instead, this statistic chooses a random, normally distributed amount of steps
-                that I took during the time between heartbeats, if greater than 5 minutes
-                (T<sub>2</sub> - T<sub>1</sub> - (1000 * 60 * 5)).
-                Of course, greater amounts away mean larger amounts of steps.
-            </p>
-            <p>
-                This model still needs fine tuning (comparing V<sub>a</sub> to V<sub>e</sub>).
-                I suppose this could lead to some interesting data.
+                I'm kinda bouncing back and forth on if it's worth it. I also
+                have something with metriport that isn't risky, but they can only use WS for garmin
+                which is a drag.
             </p>
             <p>
                 Speaking of, all this is reminding me of karlicoss' <a href="https://github.com/karlicoss/HPI">HPI</a>.

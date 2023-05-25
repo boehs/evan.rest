@@ -37,7 +37,8 @@ export default function Home() {
     vitals: [
       ['time', <Time />],
       ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>],
-      ['weather', () => heartbeat()! ? run(heartbeat()!).word : '']
+      ['weather', () => heartbeat()! ? run(heartbeat()!).word : ''],
+      ['steps', "currently disabled"]
     ],
     tech: [
       ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],
