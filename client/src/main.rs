@@ -55,7 +55,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Fetching activity after {:?}", start.elapsed());
     //let metri = metri::get(&client, &env).await?;
-    //let garmin = garmin::get(&client, &env).await?;
+    let garmin = garmin::get(&client, &env).await?;
 
     println!("Getting device statistics after {:?}", start.elapsed());
     let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
@@ -76,7 +76,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         },
         "music": music,
         "weather": weather,
-        //"activity": garmin
+        "activity": garmin
     });
 
     println!("{}", completed);

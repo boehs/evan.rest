@@ -38,7 +38,7 @@ export default function Home() {
       ['time', <Time />],
       ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>],
       ['weather', () => heartbeat()! ? run(heartbeat()!).word : ''],
-      ['steps', "currently disabled"]
+      ['steps', "more than one!"]
     ],
     tech: [
       ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],

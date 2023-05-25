@@ -1,13 +1,21 @@
-import { useRouteData } from "solid-start"
-import { hb } from "~/routes/(main)"
+import { RouteDataArgs, useRouteData } from "solid-start"
+import { createServerData$ } from "solid-start/server"
+
+export function routeData(e: RouteDataArgs) {
+    return {
+        activity: createServerData$(async (_, { env }) => {
+            return (await (env as Bindings).RESTFUL.get<Heartbeat[]>('heartbeat', "json"))?.find((e) => e.data.activity.steps)
+        })
+    }
+}
 
 export default function Steps() {
-    const { heartbeat } = useRouteData<hb>()
+    const { activity } = useRouteData<typeof routeData>()
     return <>
         <main>
             <p>How many steps have I taken today?</p>
-            <p><b>{heartbeat()?.data.activity.steps}</b> steps and <b>{heartbeat()?.data.activity.floors}</b> flights of stairs is how many!</p>
-            <hr/>
+            <p><b>{activity()?.data.activity.steps}</b> steps and <b>{activity()?.data.activity.floors}</b> flights of stairs is how many!</p>
+            <hr />
             <p>
                 This statistic is provided through a reverse engineered garmin connect
                 API. I didn't want to reverse engineer it, who wants to put such a valuable
