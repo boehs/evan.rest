@@ -24,7 +24,7 @@ pub struct MetriReturn {
 pub async fn get(client: &Client, env: &Env) -> Result<MetriReturn, reqwest::Error> {
     let now = OffsetDateTime::now_utc().date().to_string();
     let activity = client
-        .get("https://api.sandbox.metriport.com/biometrics")
+        .get("https://api.sandbox.metriport.com/activity")
         .header("x-api-key", &env.metri_secret)
         .query(&[
             ("userId", &env.metri_user),
