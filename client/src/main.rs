@@ -1,9 +1,10 @@
 mod activity_watch;
 mod weather;
 mod last_fm;
-mod metri;
+//mod metri;
+mod garmin;
 
-use std::{error::Error, path::PathBuf, env};
+use std::{error::Error, path::PathBuf, env, time::Instant};
 
 use reqwest::header::AUTHORIZATION;
 use serde_derive::Deserialize;
@@ -23,12 +24,17 @@ pub struct Env {
     lastfm_key: String,
     pw: String,
     weather_station: String,
-    metri_secret: String,
-    metri_user: String
+    /*metri_secret: String,
+    metri_user: String*/
+    garmin_user: String,
+    garmin_lb: String,
+    garmin_token: String
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
+    let start = Instant::now();
+
     let client = reqwest::Client::new();
 
     let config_path = PathBuf::from(dirs::home_dir().unwrap()).join(".config/erest");
@@ -41,16 +47,17 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("Fetching session data");
     let activity = activity_watch::get(&client, &env).await?;
 
-    println!("Fetching music");
+    println!("Fetching music after {:?}", start.elapsed());
     let music = last_fm::get(&client, &env).await?;
 
-    println!("Fetching weather");
+    println!("Fetching weather after {:?}", start.elapsed());
     let weather = weather::get(&client, &env).await?;
 
-    //println!("Fetching activity");
+    println!("Fetching activity after {:?}", start.elapsed());
     //let metri = metri::get(&client, &env).await?;
+    let garmin = garmin::get(&client, &env).await?;
 
-    println!("Getting device statistics");
+    println!("Getting device statistics after {:?}", start.elapsed());
     let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
     let battery_level = (battr.energy().value / battr.energy_full().value * 100.0) as i8;
 
@@ -69,7 +76,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         },
         "music": music,
         "weather": weather,
-        //"activity": metri
+        "activity": garmin
     });
 
     println!("{}", completed);
