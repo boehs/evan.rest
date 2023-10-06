@@ -3,5 +3,5 @@ export async function getHeartbeat(env: Bindings) {
 }
 
 export async function getMobleet(env: Bindings) {
-  return (await env.RESTFUL.get<Mobleet[]>('mobleet',"json"))![0]
+  return (await env.RESTFUL.get<Mobleet[]>('mobleet',"json"))
 }
