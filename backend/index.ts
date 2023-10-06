@@ -4,6 +4,7 @@ import { getHeartbeat } from "../lib/heartbeat"
 import { hour } from "~/routes/(main)/(vitals)/asleep"
 import { heartbeat } from "./heartbeat"
 import { run } from './weather'
+import { mobleet } from './mobleet'
 
 const app = new Hono<{
   Bindings: {
@@ -14,6 +15,7 @@ const app = new Hono<{
 app.use('*', prettyJSON())
 
 app.route('', heartbeat)
+app.route('', mobleet)
 
 app.get('/time', async c => {
   return c.text((new Date()).toLocaleTimeString(undefined, {

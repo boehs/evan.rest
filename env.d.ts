@@ -41,6 +41,13 @@ type Heartbeat = {
   }
 }
 
+// Timestamp, Value (cumulative)
+type Mobleet = {
+  things: [number,number][]
+  steps: [number,number][]
+  water: [number,number][]
+}
+
 type Go = {
   created: number,
   to: string,
