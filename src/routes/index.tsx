@@ -19,7 +19,8 @@ const messages = [
   "In today's rush we all think too much, seek too much, want too much and forget about the joy of just Being.",
   "Rest is not idleness, and to lie sometimes on the grass under trees on a summer's day, listening to the murmur of the water, or watching the clouds float across the sky, is by no means a waste of time.",
   "Don't underestimate the value of doing nothing, of just going along, listening to all the things you can't hear, and not bothering.",
-  "Almost everything will work again if you unplug it for a few minutes, including you."
+  "Almost everything will work again if you unplug it for a few minutes, including you.",
+  "Exist slowly, softly, like the trees"
 ]
 
 export function routeData() {
@@ -36,13 +37,13 @@ export default function Home() {
     basic: [['ping', 'pong'], 'about'],
     vitals: [
       ['time', <Time />],
-      ['asleep',<>{isAsleep() ? 'Yes' : 'No'}!</>],
+      ['asleep', <>{isAsleep() ? 'Yes' : 'No'}!</>],
       ['weather', () => heartbeat()! ? run(heartbeat()!).word : ''],
       ['steps', "more than one!"]
     ],
     tech: [
       ['heartbeat', () => mAgo(heartbeat()?.beat!) + ' minutes ago'],
-      ['battery', () => heartbeat.loading ? '' : `${heartbeat()?.data.device.battery.level}% and ${heartbeat()?.data.device.battery.status}` ],
+      ['battery', () => heartbeat.loading ? '' : `${heartbeat()?.data.device.battery.level}% and ${heartbeat()?.data.device.battery.status}`],
       ['music', <Show when={heartbeat()?.data.music} fallback="🔇">
         {heartbeat()?.data.music?.artist} &bull; <a href={heartbeat()?.data.music?.url}>{heartbeat()?.data.music?.track}</a>
       </Show>],
