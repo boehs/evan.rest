@@ -1,10 +1,10 @@
 mod activity_watch;
-mod weather;
 mod last_fm;
+mod weather;
 //mod metri;
 mod garmin;
 
-use std::{error::Error, path::PathBuf, env, time::Instant};
+use std::{env, error::Error, path::PathBuf, time::Instant};
 
 use reqwest::header::AUTHORIZATION;
 use serde_derive::Deserialize;
@@ -16,7 +16,7 @@ fn default_resource() -> String {
 
 #[derive(Deserialize, Debug)]
 pub struct Env {
-    #[serde(default="default_resource")]
+    #[serde(default = "default_resource")]
     aw_base: String,
     aw_event_bucket: String,
     aw_session_bucket: String,
@@ -28,7 +28,7 @@ pub struct Env {
     metri_user: String*/
     garmin_user: String,
     garmin_lb: String,
-    garmin_token: String
+    garmin_token: String,
 }
 
 #[tokio::main]
@@ -39,7 +39,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let config_path = PathBuf::from(dirs::home_dir().unwrap()).join(".config/erest");
 
-    println!("{}", config_path.clone().into_os_string().into_string().unwrap());
+    println!(
+        "{}",
+        config_path.clone().into_os_string().into_string().unwrap()
+    );
 
     dotenvy::from_path(config_path)?;
     let env = envy::from_env::<Env>()?;
@@ -55,7 +58,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Fetching activity after {:?}", start.elapsed());
     //let metri = metri::get(&client, &env).await?;
-    let garmin = garmin::get(&client, &env).await?;
+    let garmin = garmin::get(&client, &env).await.ok();
 
     println!("Getting device statistics after {:?}", start.elapsed());
     let battr = battery::Manager::new()?.batteries()?.next().unwrap()?;
