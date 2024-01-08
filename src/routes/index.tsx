@@ -20,7 +20,8 @@ const messages = [
   "Rest is not idleness, and to lie sometimes on the grass under trees on a summer's day, listening to the murmur of the water, or watching the clouds float across the sky, is by no means a waste of time.",
   "Don't underestimate the value of doing nothing, of just going along, listening to all the things you can't hear, and not bothering.",
   "Almost everything will work again if you unplug it for a few minutes, including you.",
-  "Exist slowly, softly, like the trees"
+  "Exist slowly, softly, like the trees",
+  "You're only here for a short visit. Don't hurry, don't worry. And be sure to smell the flowers along the way."
 ]
 
 export function routeData() {
