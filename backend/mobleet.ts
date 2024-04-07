@@ -55,7 +55,7 @@ app.post('/mobleet', async c => {
         const filtered = (allThings!.things || []).filter(beat => Date.now() < beat[0] + day)
 
         await c.env.RESTFUL.put('mobleet', JSON.stringify({
-            water: toCumulative(parseHealth(res.Water)),
+            water: res.Water ? toCumulative(parseHealth(res.Water)) : [],
             steps: toCumulative(filterSteps(parseHealth(res.Steps))),
             things: [...filtered, [Date.now(), res.Things]]
         }))
