@@ -19,6 +19,7 @@ export default function Root() {
   return (
     <Html lang="en">
       <Head>
+        <script async src="https://espy.boehs.org/script.js" data-website-id="c65e41eb-8bd1-4149-9087-a03846f6d103"></script>
         <Title>Evan.Rest</Title>
         <Meta property="og:title" content="Evan.Rest" />
         <Meta property="og:image" content="https://evan.rest/og.png" />
