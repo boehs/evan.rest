@@ -22,6 +22,7 @@ const messages = [
   "Almost everything will work again if you unplug it for a few minutes, including you.",
   "Exist slowly, softly, like the trees",
   "You're only here for a short visit. Don't hurry, don't worry. And be sure to smell the flowers along the way."
+  "There is more to life than increasing its speed."
 ]
 
 export function routeData() {
