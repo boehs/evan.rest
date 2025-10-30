@@ -75,8 +75,11 @@ export function getWeatherDesc(imp: ReturnType<typeof normalizeDesc>, temp: numb
     if (["Fair/clear", "Fair/clear and windy"].includes(desc) && temp < 0) return 'foxy'
     if (temp >= 23 && temp <= 30 && ['skc', 'few'].includes(imp[1])) return 'balmy'
     if (['skc', 'few', 'sct', 'bkn', 'ovc'].includes(imp[1])) {
-        if (temp >= 20 && temp < 23) return 'clement'
-        if (temp < -5) return 'snell'
+        if (temp >= 18 && temp < 24) return 'clement'
+        if (temp < -5) return 'keen'
+    }
+    if (['skc','few','sct'].includes(imp[1])) {
+      if (temp >= -2 && temp <= 10) return 'crisp'
     }
 
     // a sudden violent gust of wind or a localized storm, especially one bringing rain, snow, or sleet.
