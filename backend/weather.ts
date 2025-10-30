@@ -52,7 +52,7 @@ export enum normalizeStatus {
  * @returns the remapped description, if status is remapped. If the parsing went correctly, but there was no remap, it is the parsed string. If parsing failed, it is undefined.
  */
 export const normalizeDesc = (imp: string): [descTypeOutput, string] | [string, normalizeStatus.Original] | [undefined, normalizeStatus.BadInput] => {
-    if (!m) return [undefined, normalizeStatus.BadInput]
+    if (!imp) return [undefined, normalizeStatus.BadInput]
     let m = imp.match(/.*\/(.*)\?/)
     if (m && m[1] != undefined) {
         let p: descTypeOutput | undefined = descTypes[m[1] as keyof typeof descTypes]
